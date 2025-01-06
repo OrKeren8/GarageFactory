@@ -13,6 +13,7 @@
     {
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
+        private EnergyTank m_EnergyTank;
 
         ///can have fuel tank or electric battry
         ///שניהם צריכים לעבוד בצורה זהה

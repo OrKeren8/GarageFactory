@@ -4,5 +4,6 @@
     {
         private bool m_IceLoad;
         private int m_MaxLoadVolume;
+        private EnergyTank m_EnergyTank;
     }
 }

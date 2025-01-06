@@ -1,20 +1,12 @@
 ﻿namespace Ex03.GarageLogic
 {
-    public enum eFuelType
-    {
-        Solar,
-        Octan95,
-        Octan96,
-        Octan98
-    }
+
 
     internal class FuelTank : EnergyTank
-    {
-        private eFuelType m_FuelType;
-        
-        public FuelTank(eFuelType i_FuelType, float i_FuelCapacity) : base(i_FuelCapacity)
+    {        
+        public FuelTank(float i_FuelCapacity, eEnergyType i_EnergyType) : base(i_FuelCapacity, i_EnergyType)
         {
-            m_FuelType = i_FuelType;
+            
         }
     }
 }
