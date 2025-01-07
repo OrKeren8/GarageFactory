@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     
     internal class EnergyTank
@@ -14,12 +16,30 @@
             
         }
 
-       
+        public class ValueOutOfRangeException : Exception
+        {
+            public float MaxValue { get; }
+            public float MinValue { get; }
 
-        public virtual void Fill()
+            public ValueOutOfRangeException(float maxValue, float minValue)
+            {
+                MaxValue = maxValue;
+                MinValue = minValue;
+            }
+        }
+
+
+        public virtual void Fill(float amounttofill)
         {
             //this funciton adds combustion material to the tank untill it is full
-
+            if (amounttofill + m_CurrAmount <= m_MaxCapacity)
+            {
+                m_CurrAmount += amounttofill;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(m_MaxCapacity, 0);
+            }
         }
     }
 }
