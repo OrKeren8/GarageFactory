@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic
 {
-    internal struct Wheel
+    internal class Wheel
     {
         private string m_Manufacturer;
         private float m_AirPressure;

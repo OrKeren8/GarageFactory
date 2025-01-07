@@ -22,10 +22,12 @@
             get { return m_EnergyType; }
         }
 
-        public override void Fill()
+        public override void Fill(float i_FuelAmount, eFuelType i_FuelType)
         {
-            //this funciton adds combustion material to the tank untill it is full
-
+            ///this funciton adds fuel to the tank as requested
+            ///as long as the tank is not over flows
+            m_EnergyType = i_FuelType;
+            base.Fill(i_FuelAmount);
         }
     }
 }
