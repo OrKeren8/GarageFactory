@@ -2,7 +2,7 @@
 {
     internal class ElectricBattery : EnergyTank
     {
-        public ElectricBattery(float i_BaterryCapacity) : base(i_BaterryCapacity, eEnergyType.Electricity)
+        public ElectricBattery(float i_BaterryCapacity) : base(i_BaterryCapacity)
         {
         }
         public override void Fill()
