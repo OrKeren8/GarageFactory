@@ -3,7 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\A25 Ex03 Or 315155531 Roy 315254243\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C4F1C22B-7237-4DFF-BBFB-43CA01922BDC}|..\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj|c:\\users\\or\\desktop\\orkeren\\academic\\csharp\\garagefactory\\ex03.garagelogic\\maintainedvehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1C22B-7237-4DFF-BBFB-43CA01922BDC}|..\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj|c:\\users\\or\\desktop\\orkeren\\academic\\csharp\\garagefactory\\ex03.garagelogic\\wheel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1C22B-7237-4DFF-BBFB-43CA01922BDC}|..\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj|c:\\users\\or\\desktop\\orkeren\\academic\\csharp\\garagefactory\\ex03.garagelogic\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C4F1C22B-7237-4DFF-BBFB-43CA01922BDC}|..\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj|c:\\users\\or\\desktop\\orkeren\\academic\\csharp\\garagefactory\\ex03.garagelogic\\fueltank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4F1C22B-7237-4DFF-BBFB-43CA01922BDC}|..\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj|c:\\users\\or\\desktop\\orkeren\\academic\\csharp\\garagefactory\\ex03.garagelogic\\electricbattery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Motorcycle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -46,14 +58,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FuelTank.cs",
-              "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\FuelTank.cs",
-              "RelativeDocumentMoniker": "..\\Ex03.GarageLogic\\FuelTank.cs",
-              "ToolTip": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\FuelTank.cs",
-              "RelativeToolTip": "..\\Ex03.GarageLogic\\FuelTank.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAEAAAA",
+              "Title": "MaintainedVehicle.cs",
+              "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\MaintainedVehicle.cs",
+              "RelativeDocumentMoniker": "..\\Ex03.GarageLogic\\MaintainedVehicle.cs",
+              "ToolTip": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\MaintainedVehicle.cs*",
+              "RelativeToolTip": "..\\Ex03.GarageLogic\\MaintainedVehicle.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAswAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T13:11:42.13Z",
+              "WhenOpened": "2025-01-07T20:22:49.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\Vehicle.cs",
+              "RelativeDocumentMoniker": "..\\Ex03.GarageLogic\\Vehicle.cs",
+              "ToolTip": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\Vehicle.cs",
+              "RelativeToolTip": "..\\Ex03.GarageLogic\\Vehicle.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T20:18:53.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Wheel.cs",
+              "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\Wheel.cs",
+              "RelativeDocumentMoniker": "..\\Ex03.GarageLogic\\Wheel.cs",
+              "ToolTip": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\Wheel.cs",
+              "RelativeToolTip": "..\\Ex03.GarageLogic\\Wheel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T20:03:09.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ElectricBattery.cs",
+              "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\ElectricBattery.cs",
+              "RelativeDocumentMoniker": "..\\Ex03.GarageLogic\\ElectricBattery.cs",
+              "ToolTip": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\ElectricBattery.cs",
+              "RelativeToolTip": "..\\Ex03.GarageLogic\\ElectricBattery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-07T19:56:40.245Z",
               "EditorCaption": ""
             },
             {
@@ -62,7 +113,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "FuelTank.cs",
+              "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\FuelTank.cs",
+              "RelativeDocumentMoniker": "..\\Ex03.GarageLogic\\FuelTank.cs",
+              "ToolTip": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\Ex03.GarageLogic\\FuelTank.cs",
+              "RelativeToolTip": "..\\Ex03.GarageLogic\\FuelTank.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-06T13:11:42.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "EnergyTank.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\EnergyTank.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\EnergyTank.cs",
@@ -74,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "FuelTank.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\FuelTank.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\FuelTank.cs",
@@ -86,7 +150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "ElectricBattery.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\ElectricBattery.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\ElectricBattery.cs",
@@ -97,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Motorcycle.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Motorcycle.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Motorcycle.cs",
@@ -108,7 +172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Track.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Track.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Track.cs",
@@ -120,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Car.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Car.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Car.cs",
@@ -132,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "Wheel.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Wheel.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Wheel.cs",
@@ -144,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Vehicle.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Vehicle.cs",
               "RelativeDocumentMoniker": "..\\..\\Ex02 Or 315155531 Roy 315254243\\Ex03.GarageLogic\\Vehicle.cs",
@@ -156,7 +220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Or\\Desktop\\orkeren\\academic\\CSharp\\GarageFactory\\A25 Ex03 Or 315155531 Roy 315254243\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
