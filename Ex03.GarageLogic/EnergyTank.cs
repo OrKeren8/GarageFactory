@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+using static Ex03.GarageLogic.Utils;
+
+namespace Ex03.GarageLogic
 {
     
     internal class EnergyTank
@@ -14,12 +17,20 @@
             
         }
 
-       
+        
 
-        public virtual void Fill()
+
+        public virtual void Fill(float i_Amounttofill)
         {
             //this funciton adds combustion material to the tank untill it is full
-
+            if (m_CurrAmount + i_Amounttofill > m_MaxCapacity)
+            {
+                throw new ValueOutOfRangeException(m_MaxCapacity, 0);
+            }
+            else
+            {
+            m_CurrAmount += i_Amounttofill;
+            }
         }
     }
 }
