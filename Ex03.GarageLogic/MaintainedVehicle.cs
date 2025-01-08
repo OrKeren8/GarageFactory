@@ -22,6 +22,11 @@
             m_Status = eMaintenanceStatus.InFix;
             m_Vehicle = i_Vehicle;
         }
+
+        public void ChangeStatus(eMaintenanceStatus i_Status)
+        {
+            m_Status=i_Status;
+        }
     }
 
 }
