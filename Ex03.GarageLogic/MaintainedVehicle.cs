@@ -2,7 +2,7 @@
 {
     public enum eMaintenanceStatus
     {
-        InFix,
+        InProgress,
         Fixed,
         Paid
     }
