@@ -45,6 +45,7 @@
     <Compile Include="FuelTank.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Track.cs" />
+    <Compile Include="utils.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using System;
-using static Ex03.GarageLogic.utils;
+using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -20,16 +20,16 @@ namespace Ex03.GarageLogic
         
 
 
-        public virtual void Fill(float i_amounttofill)
+        public virtual void Fill(float i_Amounttofill)
         {
             //this funciton adds combustion material to the tank untill it is full
-            if (m_CurrAmount + i_amounttofill > m_MaxCapacity)
+            if (m_CurrAmount + i_Amounttofill > m_MaxCapacity)
             {
                 throw new ValueOutOfRangeException(m_MaxCapacity, 0);
             }
             else
             {
-            m_CurrAmount += i_amounttofill;
+            m_CurrAmount += i_Amounttofill;
             }
         }
     }

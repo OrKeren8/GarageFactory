@@ -1,4 +1,4 @@
-﻿using static Ex03.GarageLogic.utils;
+﻿using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -8,12 +8,6 @@ namespace Ex03.GarageLogic
         private float m_CurrAirPressure;
         float m_MaxAirPressure;
 
-        //public Wheel(float i_MaxAirCapacity)
-        //{
-        //    m_MaxAirPressure = i_MaxAirCapacity;
-        //    m_CurrAirPressure = 0;
-
-        //}
 
         public void FillAir(float i_AditionalPressure)
         {
