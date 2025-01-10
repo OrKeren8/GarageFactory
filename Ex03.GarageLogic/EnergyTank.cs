@@ -4,7 +4,7 @@ using static Ex03.GarageLogic.Utils;
 namespace Ex03.GarageLogic
 {
     
-    internal class EnergyTank
+    public class EnergyTank
     {
         private float m_CurrAmount;
         private float m_MaxCapacity;
@@ -16,10 +16,7 @@ namespace Ex03.GarageLogic
             m_CurrAmount = 0;
             
         }
-
         
-
-
         public virtual void Fill(float i_Amounttofill)
         {
             //this funciton adds combustion material to the tank untill it is full
