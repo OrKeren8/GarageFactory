@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class ClassFactory
     {
@@ -9,6 +7,7 @@ namespace Ex03.GarageLogic
         {
             return new Garage();
         }
+        /*
         public Car GetNewCar(eColor i_Color, int i_NumOfDoors)
         {
             return new Car(getNewFuelTank(Conf.CarFuelTankSize, Conf.CarBaseFuelType), i_Color, i_NumOfDoors);
@@ -28,5 +27,6 @@ namespace Ex03.GarageLogic
         {
             return new ElectricBattery(i_ChargeTimeCapacity);
         }
+        */
     }
 }

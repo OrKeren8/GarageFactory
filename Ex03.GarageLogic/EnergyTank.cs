@@ -5,7 +5,7 @@ using static Ex03.GarageLogic.Utils;
 namespace Ex03.GarageLogic
 {
     
-    public class EnergyTank
+    public abstract class EnergyTank
     {
         internal float m_CurrAmount;
         internal float m_MaxCapacity;
@@ -31,6 +31,11 @@ namespace Ex03.GarageLogic
             {
             m_CurrAmount += i_Amounttofill;
             }
+        }
+
+        public virtual void Fill(float i_FuelAmount, eFuelType i_FuelType)
+        {
+            Fill(i_FuelAmount);
         }
     }
 }

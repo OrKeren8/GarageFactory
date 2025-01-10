@@ -6,19 +6,24 @@ namespace UI
 {
     public class UI
     {
-        private Garage m_Garage;
+        private ClassFactory m_ClassFactory = new ClassFactory();
+        private Garage m_Garage = new Garage();
 
-        public UI(Garage i_Garage)
+        public UI()
         {
-            m_Garage = i_Garage;
+        }
+
+        public void StartGragageUI()
+        {
+            this.printVehicleInfo("11111");
         }
 
         private void printVehicleInfo(string i_LicenseNumber)
         {
             ///prints all of the data of a specific vehicle by its license number
 
-            Dictionary<string, string> vehicleInfo = m_Garage.GetVehicleData();
-
+            Dictionary<string, string> vehicleInfo = m_Garage.GetVehicleData(i_LicenseNumber);
+            
             printDictionary(vehicleInfo);
 
         }
@@ -30,16 +35,5 @@ namespace UI
                 Console.WriteLine($"{item.Key}: {item.Value}");
             }
         }
-
-        private void PrintWheels(List<Wheel> i_WheelsToPrint)
-        {
-            Console.WriteLine("The wheels details are:");
-            foreach (Wheel currWheel in i_WheelsToPrint)
-            {
-                Console.WriteLine($"Manufacturer: {currWheel.Manufacturer}");
-                Console.WriteLine($"Current Air Pressure Status: {currWheel.CurrAirPressure}");
-            }
-        }
-
     }
 }

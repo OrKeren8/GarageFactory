@@ -4,6 +4,8 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
+        private Dictionary<string, Vehicle> m_Vehicles;
+
         public void AddNewVehicle(Vehicle i_Vehicle) 
         {
             ///this funciton add new veicle to the garage,
@@ -13,6 +15,8 @@ namespace Ex03.GarageLogic
         public List<string> GetAllLicenseNumbersFiltered(eMaintenanceStatus i_Filter)
         {
             ///this funcition returns all of the license numbers of all of the cars in the garage
+            ///
+            return new List<string>();
         }
 
         public void ChangeStatus(string i_LicenseNumber, eMaintenanceStatus i_NewState)
@@ -26,14 +30,14 @@ namespace Ex03.GarageLogic
             ///fill air in a specific car to the max
         }
 
-        public void FuelVehicle(string i_LicenseNumber, eEnergyType i_EnergyTpe, float i_Amount)
+        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)
         {
             ///Add energy to the energy tank of a vehicle
         }
 
-        public VehicleData GetVehicleData(string i_LicenseNumber)
+        public Dictionary<string, string> GetVehicleData(string i_LicenseNumber)
         {
-            ///returns all of the data on a specific vehicle in the garage
+            return m_Vehicles[i_LicenseNumber].GetInfo();
         }
     }
 }
