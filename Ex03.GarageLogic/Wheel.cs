@@ -1,4 +1,5 @@
-﻿using static Ex03.GarageLogic.Utils;
+﻿using System.Collections.Generic;
+using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -8,6 +9,15 @@ namespace Ex03.GarageLogic
         private float m_CurrAirPressure;
         float m_MaxAirPressure;
 
+        public Dictionary<string, string> GetInfo()
+        {
+            var info = new Dictionary<string, string>();
+            
+            info["Manufacturer"] = m_Manufacturer;
+            info["Air Pressure"] = m_CurrAirPressure.ToString();
+
+            return info;
+        }
 
         public void FillAir(float i_AditionalPressure)
         {

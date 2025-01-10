@@ -1,8 +1,14 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Dynamic;
+
+namespace Ex03.GarageLogic
 {
-    public class VehicleFactory
+    public class ClassFactory
     {
 
+        public Garage CreateGarage()
+        {
+            return new Garage();
+        }
         public Car GetNewCar(eColor i_Color, int i_NumOfDoors)
         {
             return new Car(getNewFuelTank(Conf.CarFuelTankSize, Conf.CarBaseFuelType), i_Color, i_NumOfDoors);

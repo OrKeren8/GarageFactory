@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
@@ -6,8 +7,8 @@ namespace Ex03.GarageLogic
     
     public class EnergyTank
     {
-        private float m_CurrAmount;
-        private float m_MaxCapacity;
+        internal float m_CurrAmount;
+        internal float m_MaxCapacity;
         
 
         public EnergyTank(float i_MaxCapacity)
@@ -16,6 +17,8 @@ namespace Ex03.GarageLogic
             m_CurrAmount = 0;
             
         }
+
+        public abstract Dictionary<string, string> GetInfo();
         
         public virtual void Fill(float i_Amounttofill)
         {

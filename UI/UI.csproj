@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4F1C22B-7237-4DFF-BBFB-43CA01922BDC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Ex03.GarageLogic</RootNamespace>
-    <AssemblyName>Ex03.GarageLogic</AssemblyName>
+    <ProjectGuid>{DF748B64-5AB1-4A75-8602-84126A9E36DF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>UI</RootNamespace>
+    <AssemblyName>UI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,26 +32,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="Conf.cs" />
-    <Compile Include="ElectricBattery.cs" />
-    <Compile Include="EnergyTank.cs" />
-    <Compile Include="FuelTank.cs" />
-    <Compile Include="Garage.cs" />
-    <Compile Include="MaintainedVehicle.cs" />
-    <Compile Include="Motorcycle.cs" />
-    <Compile Include="Track.cs" />
-    <Compile Include="Utils.cs" />
-    <Compile Include="Vehicle.cs" />
-    <Compile Include="VehicleFactory.cs" />
-    <Compile Include="Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

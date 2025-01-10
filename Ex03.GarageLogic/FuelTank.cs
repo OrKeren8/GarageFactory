@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+using System.Linq;
+namespace Ex03.GarageLogic
 {
 
     public enum eFuelType
@@ -20,6 +22,17 @@
         public eFuelType EnergyType
         {
             get { return m_EnergyType; }
+        }
+
+        public override Dictionary<string, string> GetInfo()
+        {
+            Dictionary<string, string> info = new Dictionary<string, string>();
+
+            info["Tank Capacity"] = base.m_MaxCapacity.ToString();
+            info["Current Fuel Amount Left"] = $"{base.m_CurrAmount.ToString()} liters";
+            info["Fuel Type"] = m_EnergyType.ToString();
+
+            return info;
         }
 
         public override void Fill(float i_FuelAmount, eFuelType i_FuelType)
