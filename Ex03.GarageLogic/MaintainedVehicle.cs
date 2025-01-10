@@ -19,7 +19,7 @@
         {
             m_OwnerName = i_OwnerName;
             m_PhoneNumber = i_PhoneNumber;
-            m_Status = eMaintenanceStatus.InFix;
+            m_Status = eMaintenanceStatus.InProgress;
             m_Vehicle = i_Vehicle;
         }
 
