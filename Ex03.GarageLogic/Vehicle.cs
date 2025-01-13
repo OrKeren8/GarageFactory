@@ -5,22 +5,22 @@ namespace Ex03.GarageLogic
 {
     public class Vehicle
     {
-        private string m_Name;
-        private string m_LicenseNumber;
-        private string m_ModelName;
-        private List<Wheel> m_Wheels;
-        private EnergyTank m_EnergyTank;
+        private string Name {  get; set; }
+        public string LicenseNumber {  get; private set; }
+        private string ModelName { get; set; }
+        private List<Wheel> Wheels { get; set; }
+        private EnergyTank EnergyTank { get; set; }
 
         public virtual Dictionary<string, string> GetInfo()
         {
             Dictionary<string, string> info = new Dictionary<string, string>();
 
-            info["License number"] = m_LicenseNumber.ToString();
-            info["Name"] = m_Name;
-            info["Model name"] = m_ModelName.ToString();
+            info["License number"] = LicenseNumber.ToString();
+            info["Name"] = Name;
+            info["Model name"] = ModelName.ToString();
             
-            info.Concat(m_EnergyTank.GetInfo());
-            info.Concat(m_Wheels[0].GetInfo());
+            info.Concat(EnergyTank.GetInfo());
+            info.Concat(Wheels[0].GetInfo());
 
             return info;
         }

@@ -4,12 +4,18 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, MaintainedVehicle> m_Vehicles;
+        private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; }
+
+        public bool CheckIfExistingVehicle(string i_LicenseNumber)
+        {
+            return Vehicles.ContainsKey(i_LicenseNumber);
+        }
 
         public void AddNewVehicle(Vehicle i_Vehicle) 
         {
             ///this funciton add new veicle to the garage,
             ///if the vehicle is already exist, its status will be changed to in progress
+            ///
         }
 
         public List<string> GetAllLicenseNumbersFiltered(eMaintenanceStatus i_Filter)
