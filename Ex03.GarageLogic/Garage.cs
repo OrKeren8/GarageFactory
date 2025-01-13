@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, Vehicle> m_Vehicles;
+        private Dictionary<string, MaintainedVehicle> m_Vehicles;
 
         public void AddNewVehicle(Vehicle i_Vehicle) 
         {
