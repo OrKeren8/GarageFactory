@@ -6,9 +6,17 @@ namespace Ex03.GarageLogic
     {
         private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; }
 
-        public bool CheckIfExistingVehicle(string i_LicenseNumber)
+        public bool IsVehicleExist(string i_LicenseNumber, bool i_ThrowException=false)
         {
-            return Vehicles.ContainsKey(i_LicenseNumber);
+            bool isExist = false;
+
+            isExist = Vehicles.ContainsKey(i_LicenseNumber);
+            if (i_ThrowException)
+            {
+                throw new System.ArgumentException("Vehicle does not exist");
+            }
+            
+            return isExist;
         }
 
         public void AddNewVehicle(Vehicle i_Vehicle) 
@@ -25,10 +33,13 @@ namespace Ex03.GarageLogic
             return new List<string>();
         }
 
-        public void ChangeStatus(string i_LicenseNumber, eMaintenanceStatus i_NewState)
+        public void ChangeStatus(string i_LicenseNumber, eMaintenanceStatus i_Status)
         {
             ///change the statis of a car in the garage to new state
             ///the car is chosen by input license number
+
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            Vehicles[i_LicenseNumber].ChangeStatus(i_Status);
         }
 
         public void FillWheelsToTheMax(string i_LicenseNumber)
@@ -45,5 +56,6 @@ namespace Ex03.GarageLogic
         {
             return m_Vehicles[i_LicenseNumber].GetInfo();
         }
+
     }
 }
