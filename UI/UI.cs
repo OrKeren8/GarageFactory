@@ -6,7 +6,7 @@ namespace UI
 {
     public class UI
     {
-        private ClassFactory m_ClassFactory = new ClassFactory();
+        private VehicleFactory m_ClassFactory = new VehicleFactory();
         private Garage m_Garage = new Garage();
 
         public UI()

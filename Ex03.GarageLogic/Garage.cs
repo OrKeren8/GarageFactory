@@ -21,9 +21,8 @@ namespace Ex03.GarageLogic
 
         public void AddNewVehicle(Vehicle i_Vehicle) 
         {
-            ///this funciton add new veicle to the garage,
-            ///if the vehicle is already exist, its status will be changed to in progress
-            ///
+            ///add new veicle to the garage, if the vehicle is already exist throw an exception
+
         }
 
         public List<string> GetAllLicenseNumbersFiltered(eMaintenanceStatus i_Filter)
