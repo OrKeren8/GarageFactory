@@ -21,7 +21,7 @@ namespace UI
         {
 
         }
-        public static bool CheckIsValidStatus(string i_StatusInput)//todo
+        public static bool IsValidStatus(string i_StatusInput)//todo
         {
 
         }

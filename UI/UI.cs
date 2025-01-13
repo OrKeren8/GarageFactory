@@ -113,7 +113,7 @@ namespace UI
             
             Console.WriteLine("Please enter the status you want for your vehicle:");
             wantedChangeStatusString = Console.ReadLine();
-            while (!StringValidator.CheckIsValidStatus(wantedChangeStatusString))
+            while (!StringValidator.IsValidStatus(wantedChangeStatusString))
             {
                 Console.WriteLine("Wrong input, please try again");
                 wantedChangeStatusString = Console.ReadLine();
