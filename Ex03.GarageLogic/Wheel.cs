@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     {
         private string m_Manufacturer;
         private float m_CurrAirPressure;
-        float m_MaxAirPressure;
+        private float m_MaxAirPressure;
 
         public Dictionary<string, string> GetInfo()
         {
@@ -31,6 +31,17 @@ namespace Ex03.GarageLogic
                 m_CurrAirPressure += i_AditionalPressure;
             }
 
+        }
+
+        public virtual Dictionary<string, FieldDescriptor> GetWheelSchema()
+        {
+            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+
+            schema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
+            schema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = false };
+            schema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
+
+            return schema;
         }
     }
 }

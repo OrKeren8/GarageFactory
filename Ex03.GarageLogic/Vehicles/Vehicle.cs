@@ -5,18 +5,28 @@ namespace Ex03.GarageLogic
 {
     public class Vehicle
     {
-        private string Name { get; set; }
         public string LicenseNumber { get; private set; }
         private string ModelName { get; set; }
         private List<Wheel> Wheels { get; set; }
         private EnergyTank EnergyTank { get; set; }
+
+
+        public void InitVehicle( string i_LicenseNumber,
+                        string i_MmodelName,
+                        List<Wheel> i_Wheels,
+                        EnergyTank i_EnergyTank)//most likly we need to give a schema
+        {
+            LicenseNumber = i_LicenseNumber;
+            ModelName = i_MmodelName;
+            Wheels = i_Wheels;
+            EnergyTank = i_EnergyTank;
+        }
 
         public virtual Dictionary<string, string> GetInfo()
         {
             Dictionary<string, string> info = new Dictionary<string, string>();
 
             info["License number"] = LicenseNumber.ToString();
-            info["Name"] = Name;
             info["Model name"] = ModelName.ToString();
 
             info.Concat(EnergyTank.GetInfo());
@@ -28,9 +38,11 @@ namespace Ex03.GarageLogic
         public virtual Dictionary<string, FieldDescriptor> GetSchema()
         {
             Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
-         
-            schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true },
-            schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false }
+
+            schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true };
+            schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
+            ///TODO: add info of wheels
+            var schema = schema.Concat(Wheel.GetWheelSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
             return schema;
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Ex03.GarageLogic
 {
@@ -13,32 +12,37 @@ namespace Ex03.GarageLogic
 
     public class Car : Vehicle
     {
-        private eColor m_Color;
-        private int m_Doors;
-        public Car(eColor i_Color, int i_Doors)
+        private eColor Color {  get; set; }
+        private int NumOfDoors {  get; set; }
+        public void InitCar( eColor i_Color,
+                        int i_NumOfDoors,
+                        string i_LicenseNumber,
+                        string i_ModelName,
+                        List<Wheel> i_Wheels,
+                        EnergyTank i_EnergyTank) : base(i_LicenseNumber, i_ModelName, i_Wheels, i_EnergyTank)
         {
-            m_Color = i_Color;
-            m_Doors = i_Doors;
+            Color = i_Color;
+            NumOfDoors = i_NumOfDoors;
         }
 
         public override Dictionary<string, string> GetInfo()
         {
             Dictionary<string, string> info = base.GetInfo();
 
-            info["Color"] = m_Color.ToString();
-            info["Amount of doors:"] = m_Doors.ToString();
+            info["Color"] = Color.ToString();
+            info["Amount of doors:"] = NumOfDoors.ToString();
 
             return info;
         }
 
-        public override List<FieldDescriptor> GetSchema()
+        public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            List<FieldDescriptor> carListSchema = base.GetSchema();
+            Dictionary<string, FieldDescriptor> carSchema = base.GetSchema();
 
-            carListSchema.Add(new FieldDescriptor { StringDescription = "Color", Type = typeof(eColor), IsRequired = true });
-            carListSchema.Add(new FieldDescriptor { StringDescription = "Doors", Type = typeof(int), IsRequired = true });
-            return carListSchema;
-            
+            carSchema["Color"] = new FieldDescriptor { StringDescription = "Color", Type = typeof(eColor), IsRequired = true};
+            carSchema["Amount of doors"] = new FieldDescriptor { StringDescription = "Amount of doors", Type = typeof(int), IsRequired = true };
+
+            return carSchema;
         }
     }
 }

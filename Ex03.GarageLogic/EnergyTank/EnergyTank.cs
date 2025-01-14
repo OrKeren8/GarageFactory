@@ -37,5 +37,17 @@ namespace Ex03.GarageLogic
         {
             Fill(i_FuelAmount);
         }
+
+        public virtual Dictionary<string, FieldDescriptor> GetSchema()
+        {
+            Dictionary<string, FieldDescriptor> energyTankSchema = new Dictionary<string, FieldDescriptor>();
+
+            energyTankSchema["Current Amount"] = new FieldDescriptor { StringDescription = "Current Amount", Type = typeof(float), IsRequired = true };
+            energyTankSchema["Max Amount"] = new FieldDescriptor { StringDescription = "Max Amount", Type = typeof(float), IsRequired = true };
+
+            return energyTankSchema;
+        }
+        ///TODO: add get schema for it and for the chileds
+
     }
 }

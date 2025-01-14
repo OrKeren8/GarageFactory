@@ -9,15 +9,15 @@ namespace Ex03.GarageLogic
         private float m_MaxLoadVolume;
         private EnergyTank m_EnergyTank;
 
-        public override List<FieldDescriptor> GetSchema()
+        public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            List<FieldDescriptor> trackListSchema = base.GetSchema();
+            Dictionary<string, FieldDescriptor> trackSchema = base.GetSchema();
 
-            trackListSchema.Add(new FieldDescriptor { StringDescription = "Ice Load", Type = typeof(bool), IsRequired = true });
-            trackListSchema.Add(new FieldDescriptor { StringDescription = "Max Load Volume", Type = typeof(float), IsRequired = true });
-            trackListSchema.Add(new FieldDescriptor { StringDescription = "Energy Tank", Type = typeof(EnergyTank), IsRequired = true });
-            return trackListSchema;
+            trackSchema["Ice Load"] = new FieldDescriptor { StringDescription = "Ice Load", Type = typeof(bool), IsRequired = true };
+            trackSchema["Max Load Volume"] = new FieldDescriptor { StringDescription = "Max Load Volume", Type = typeof(float), IsRequired = true };
+            //trackSchema["Energy Tank"] = new FieldDescriptor { StringDescription = "Energy Tank", Type = typeof(EnergyTank), IsRequired = true };
 
+            return trackSchema;
         }
 
     }
