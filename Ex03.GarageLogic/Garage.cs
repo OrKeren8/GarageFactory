@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             isExist = Vehicles.ContainsKey(i_LicenseNumber);
             if (i_ThrowException)
             {
-                throw new AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", ErrorCode.VehiceNotExist);
+                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
             }
 
             return isExist;
@@ -25,6 +25,15 @@ namespace Ex03.GarageLogic
         public void AddNewVehicle(Vehicle i_Vehicle) 
         {
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
+            if (IsVehicleExist(i_Vehicle.LicenseNumber))
+            {
+                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_Vehicle.LicenseNumber}] already exist", Utils.Utils.ErrorCode.VehicleAlreadyExist);
+            }
+            else
+            {
+                MaintainedVehicle vehicleToAdd = Vehicles[i_Vehicle.LicenseNumber];
+                Vehicles.Add(i_Vehicle.LicenseNumber, vehicleToAdd);
+            }
 
         }
 
@@ -61,7 +70,7 @@ namespace Ex03.GarageLogic
             ///fill air in a specific car to the max
             if (!IsVehicleExist(i_LicenseNumber))
             {
-                throw new Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", ErrorCode.VehiceNotExist);
+                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
             }
             else
             {
@@ -75,9 +84,27 @@ namespace Ex03.GarageLogic
             
         }
 
+        /// <summary>
+/// get the license number and if is exist it fuel the tank by the specific fuel time in the amount he want
+/// </summary>
+/// <param name="i_LicenseNumber"></param>
+/// <param name="i_FuelTpe"></param>
+/// <param name="i_Amount"></param>
+/// <exception cref="Utils.Utils.AppException"></exception>
         public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)
         {
             ///Add energy to the energy tank of a vehicle
+            if (!IsVehicleExist(i_LicenseNumber))
+            {
+                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
+            }
+            else
+            {
+                MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
+                currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelTpe);
+
+            }
+
         }
 
         public Dictionary<string, string> GetVehicleData(string i_LicenseNumber)
