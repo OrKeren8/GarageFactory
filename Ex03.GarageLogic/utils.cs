@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -18,7 +19,8 @@ namespace Ex03.GarageLogic
         }
         public enum ErrorCode
         {
-            VehicleTypeNotExist = 1001
+            VehicleTypeNotExist = 1001,
+            VehiceNotExist = 1002
         }
 
         public class AppException : Exception
@@ -31,5 +33,8 @@ namespace Ex03.GarageLogic
                 ErrorCode = errorCode;
             }
         }
+
+        
+
     }
 }

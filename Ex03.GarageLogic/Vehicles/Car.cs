@@ -30,5 +30,15 @@ namespace Ex03.GarageLogic
 
             return info;
         }
+
+        public override List<FieldDescriptor> GetSchema()
+        {
+            List<FieldDescriptor> carListSchema = base.GetSchema();
+
+            carListSchema.Add(new FieldDescriptor { StringDescription = "Color", Type = typeof(eColor), IsRequired = true });
+            carListSchema.Add(new FieldDescriptor { StringDescription = "Doors", Type = typeof(int), IsRequired = true });
+            return carListSchema;
+            
+        }
     }
 }

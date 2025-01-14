@@ -72,8 +72,9 @@ namespace UI
             vehicleLicenseNumber = Console.ReadLine();
             if (!m_Garage.IsVehicleExist(vehicleLicenseNumber))
             {
-                Vehicle newUserVehicle = m_Garage.GetVehicleData(vehicleLicenseNumber); //TODO: i dont understand what this do?
-                m_Garage.AddNewVehicle(newUserVehicle);
+                //List(Properties) = m_Garage.GetVehicleData(vehicleLicenseNumber); //TODO: i dont understand what this do?
+                //Vehicle newUserVehicle = getDataFromUser(prope);
+                m_Garage.AddNewVehicle(newVehicle);
                 Console.WriteLine("Successfully added!");
             }
             else

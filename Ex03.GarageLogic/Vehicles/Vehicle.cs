@@ -25,13 +25,14 @@ namespace Ex03.GarageLogic
             return info;
         }
 
-        public List<FieldDescriptor> GetObjectData()
+        public virtual Dictionary<string, FieldDescriptor> GetSchema()
         {
-            return new List<FieldDescriptor> {
-                    new FieldDescriptor { Name = "Name", Type = typeof(string), IsRequired = true },
-                    new FieldDescriptor { Name = "License number", Type = typeof(string), IsRequired = true },
-                    new FieldDescriptor { Name = "Model name", Type = typeof(string), IsRequired = false }
-                };
+            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+         
+            schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true },
+            schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false }
+
+            return schema;
         }
     }
 }

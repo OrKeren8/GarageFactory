@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Ex03.GarageLogic
 {
     public enum eLicenseType
     {
@@ -9,7 +12,7 @@
     }
 
 
-    internal class Motorcycle
+    public class Motorcycle : Vehicle
     {
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
@@ -33,5 +36,15 @@
         /// rather we want:
         /// car.FillEnergyTank(this function will use the energyTank.AddEnergy) 
         ///fillEnergy will call the EnergyTank.addAnergy -> 
+    public override List<FieldDescriptor> GetSchema()
+    {
+        List<FieldDescriptor> motorcycleListSchema = base.GetSchema();
+
+        motorcycleListSchema.Add(new FieldDescriptor { StringDescription = "License Type", Type = typeof(eLicenseType), IsRequired = true });
+        motorcycleListSchema.Add(new FieldDescriptor { StringDescription = "Engine Volume", Type = typeof(int), IsRequired = true });
+        motorcycleListSchema.Add(new FieldDescriptor { StringDescription = "Energy Tank", Type = typeof(EnergyTank), IsRequired = true });
+        return motorcycleListSchema;
+
+    }
     }
 }

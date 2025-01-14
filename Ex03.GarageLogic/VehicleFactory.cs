@@ -15,12 +15,10 @@ namespace Ex03.GarageLogic
 
     public class FieldDescriptor
     {
-        public string Name { get; set; }
+        public string StringDescription { get; set; }
         public Type Type { get; set; }
         public object Value { get; set; } = null;
         public bool IsRequired { get; set; }
-
-
     }
 
     public class VehicleFactory
@@ -30,14 +28,45 @@ namespace Ex03.GarageLogic
             return new Garage();
         }
 
-        public Dictionary<string,  GetVehicleSchema(eVehiclesTypes i_VehicleType)
+        public Dictionary<string, FieldDescriptor> GetVehicleSchema(eVehiclesTypes i_VehicleType)
         {
-            ///creates a vehicle by all of the vehicles types in the application
-            ///
+            switch (i_VehicleType)
+            {
+                case eVehiclesTypes.Motorcycle:
+                    return Motorcycle.GetSchema();
+                case eVehiclesTypes.ElectricMotorcycle:
+                    return Motorcycle.GetSchema();
+                case eVehiclesTypes.Track:
+                    return Track.GetSchema();
+                case eVehiclesTypes.Car:
+                    return Car.GetSchema();
+                case eVehiclesTypes.ElectricCar:
+                    return Car.GetSchema();
+                    break;
+                default:
+                    throw new AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", ErrorCode.VehicleTypeNotExist);
+            }
+
+            return vehicle;
+        }
+
+        /// <summary>
+        /// creates a vehicle a new vehicle from specific type with already created object schema
+        /// for all the data required in order to call the object constractor
+        /// </summary>
+        /// <param name="i_VehicleType">The type of a vehicle</param>
+        /// <param name="i_ObjectSchema">A schema representing the required object</param>
+        /// <returns>The new desired vehicle</returns>
+        /// <exception cref="AppException">If the vehicle type does not exist</exception>
+        public Vehicle CreateVehicle(eVehiclesTypes i_VehicleType, List<FieldDescriptor> i_ObjectSchema)
+        {
             Vehicle vehicle;
 
             switch (i_VehicleType)
             {
+                case eVehiclesTypes.Car:
+                    vehicle = createCar(i_ObjectSchema);
+                    break;
                 case eVehiclesTypes.Motorcycle:
                     vehicle = createMotorcycle();
                     break;
@@ -45,9 +74,6 @@ namespace Ex03.GarageLogic
                     vehicle = createElectricMotorcycle();
                 case eVehiclesTypes.Track:
                     vehicle = createTrack();
-                    break;
-                case eVehiclesTypes.Car:
-                    vehicle = createCar();
                     break;
                 case eVehiclesTypes.ElectricCar:
                     vehicle = createElectricCar();
@@ -59,38 +85,9 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
-        public Vehicle CreateVehicle(eVehiclesTypes i_VehicleType)
+        public Car createCar(List<FieldDescriptor> i_ObjectSchema)
         {
-            ///creates a vehicle by all of the vehicles types in the application
-            ///
-            Vehicle vehicle;
-
-            switch (i_VehicleType)
-            {
-                case eVehiclesTypes.Motorcycle:
-                    vehicle = createMotorcycle();
-                    break;
-                case eVehiclesTypes.ElectricMotorcycle:
-                    vehicle = createElectricMotorcycle();
-                case eVehiclesTypes.Track:
-                    vehicle = createTrack();
-                    break;
-                case eVehiclesTypes.Car:
-                    vehicle = createCar();
-                    break;
-                case eVehiclesTypes.ElectricCar:
-                    vehicle = createElectricCar();
-                    break;
-                default:
-                    throw new AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", ErrorCode.VehicleTypeNotExist);
-            }
-
-            return vehicle;
-        }
-
-        public Car createCar(eColor i_Color, int i_NumOfDoors)
-        {
-            return new Car(getNewFuelTank(Conf.CarFuelTankSize, Conf.CarBaseFuelType), i_Color, i_NumOfDoors);
+            return new Car(createFuelTank(Conf.CarFuelTankSize, Conf.CarBaseFuelType), i_ObjectSchema["color"].Value, i_ObjectSchema[1].Value);
         }
 
         public Car createElectricCar(eColor i_Color, int i_NumOfDoors)

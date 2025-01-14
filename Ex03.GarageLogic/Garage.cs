@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -18,9 +19,9 @@ namespace Ex03.GarageLogic
             isExist = Vehicles.ContainsKey(i_LicenseNumber);
             if (i_ThrowException)
             {
-                throw new System.ArgumentException("Vehicle does not exist");
+                throw new AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", ErrorCode.VehiceNotExist);
             }
-            
+
             return isExist;
         }
 
