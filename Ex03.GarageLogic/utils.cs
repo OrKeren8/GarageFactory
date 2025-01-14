@@ -3,7 +3,7 @@ using System;
 
 namespace Ex03.GarageLogic
 {
-    internal class Utils
+    public class Utils
     {
         public class ValueOutOfRangeException : Exception
         {
@@ -16,6 +16,20 @@ namespace Ex03.GarageLogic
                 MinValue = i_MinValue;
             }
         }
+        public enum ErrorCode
+        {
+            VehicleTypeNotExist = 1001
+        }
 
+        public class AppException : Exception
+        {
+            public ErrorCode ErrorCode { get; }
+
+            public AppException(string message, ErrorCode errorCode)
+                : base($"{message} (Error Code: {(int)errorCode})")
+            {
+                ErrorCode = errorCode;
+            }
+        }
     }
 }
