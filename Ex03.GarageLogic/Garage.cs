@@ -2,9 +2,14 @@
 
 namespace Ex03.GarageLogic
 {
+
+
     public class Garage
     {
         private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; }
+
+        
+        
 
         public bool IsVehicleExist(string i_LicenseNumber, bool i_ThrowException=false)
         {
@@ -17,6 +22,11 @@ namespace Ex03.GarageLogic
             }
             
             return isExist;
+        }
+
+        public Dictionary<string, string> GetPropertiesForVehicleCreation()
+        {
+            return 
         }
 
         public void AddNewVehicle(Vehicle i_Vehicle) 

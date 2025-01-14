@@ -1,12 +1,26 @@
-﻿using static Ex03.GarageLogic.Utils;
+﻿using System;
+using System.Collections.Generic;
+using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
 {
     public enum eVehiclesTypes
     {
         Motorcycle,
-        Track,
-        Car
+        ElectricMotorcycle,
+        Car,
+        ElectricCar,
+        Track
+    }
+
+    public class FieldDescriptor
+    {
+        public string Name { get; set; }
+        public Type Type { get; set; }
+        public object Value { get; set; } = null;
+        public bool IsRequired { get; set; }
+
+
     }
 
     public class VehicleFactory
@@ -14,6 +28,35 @@ namespace Ex03.GarageLogic
         public Garage CreateGarage()
         {
             return new Garage();
+        }
+
+        public Dictionary<string,  GetVehicleSchema(eVehiclesTypes i_VehicleType)
+        {
+            ///creates a vehicle by all of the vehicles types in the application
+            ///
+            Vehicle vehicle;
+
+            switch (i_VehicleType)
+            {
+                case eVehiclesTypes.Motorcycle:
+                    vehicle = createMotorcycle();
+                    break;
+                case eVehiclesTypes.ElectricMotorcycle:
+                    vehicle = createElectricMotorcycle();
+                case eVehiclesTypes.Track:
+                    vehicle = createTrack();
+                    break;
+                case eVehiclesTypes.Car:
+                    vehicle = createCar();
+                    break;
+                case eVehiclesTypes.ElectricCar:
+                    vehicle = createElectricCar();
+                    break;
+                default:
+                    throw new AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", ErrorCode.VehicleTypeNotExist);
+            }
+
+            return vehicle;
         }
 
         public Vehicle CreateVehicle(eVehiclesTypes i_VehicleType)
@@ -27,11 +70,16 @@ namespace Ex03.GarageLogic
                 case eVehiclesTypes.Motorcycle:
                     vehicle = createMotorcycle();
                     break;
+                case eVehiclesTypes.ElectricMotorcycle:
+                    vehicle = createElectricMotorcycle();
                 case eVehiclesTypes.Track:
                     vehicle = createTrack();
                     break;
                 case eVehiclesTypes.Car:
                     vehicle = createCar();
+                    break;
+                case eVehiclesTypes.ElectricCar:
+                    vehicle = createElectricCar();
                     break;
                 default:
                     throw new AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", ErrorCode.VehicleTypeNotExist);
