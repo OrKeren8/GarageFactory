@@ -29,11 +29,9 @@ namespace Ex03.GarageLogic
         }
 
         /// <summary>
-        /// creates a vehicle a new vehicle from specific type with already created object schema
-        /// for all the data required in order to call the object constractor
+        /// creates new vehivle from specific type
         /// </summary>
         /// <param name="i_VehicleType">The type of a vehicle</param>
-        /// <param name="i_ObjectSchema">A schema representing the required object</param>
         /// <returns>The new desired vehicle</returns>
         /// <exception cref="AppException">If the vehicle type does not exist</exception>
         public Vehicle CreateVehicle(eVehiclesTypes i_VehicleType)
@@ -57,3 +55,7 @@ namespace Ex03.GarageLogic
 
             return vehicle;
         }
+    }
+}
+
+            

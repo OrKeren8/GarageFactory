@@ -42,5 +42,12 @@ namespace Ex03.GarageLogic
             m_EnergyType = i_FuelType;
             base.Fill(i_FuelAmount);
         }
+        public override Dictionary<string, FieldDescriptor> GetSchema()
+        {
+            Dictionary<string, FieldDescriptor> fuelTankSchema = new Dictionary<string, FieldDescriptor>();
+
+            fuelTankSchema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = true };
+            return fuelTankSchema;
+        }
     }
 }

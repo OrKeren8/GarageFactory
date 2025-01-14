@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     {
         public string LicenseNumber { get; private set; }
         private string ModelName { get; set; }
-        private List<Wheel> Wheels { get; set; }
+        public List<Wheel> Wheels { get; set; }
         private EnergyTank EnergyTank { get; set; }
 
 
@@ -41,10 +41,11 @@ namespace Ex03.GarageLogic
 
             schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true };
             schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
-            ///TODO: add info of wheels
-            var schema = schema.Concat(Wheel.GetWheelSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var mergedSchema = schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var mergedSchemanewer = schema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
-            return schema;
+
+            return mergedSchemanewer;
         }
     }
 }

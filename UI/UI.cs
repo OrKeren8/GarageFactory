@@ -1,5 +1,6 @@
 ﻿using Ex03.GarageLogic;
 using System.Collections.Generic;
+using Utils;
 using System;
 
 namespace UI
@@ -74,7 +75,7 @@ namespace UI
             {
                 //List(Properties) = m_Garage.GetVehicleData(vehicleLicenseNumber); //TODO: i dont understand what this do?
                 //Vehicle newUserVehicle = getDataFromUser(prope);
-                m_Garage.AddNewVehicle(newVehicle);
+                //m_Garage.AddNewVehicle(newVehicle);
                 Console.WriteLine("Successfully added!");
             }
             else
@@ -90,11 +91,15 @@ namespace UI
             eMaintenanceStatus wantedStatus;
             string wantedStatusString;
             
-            Console.WriteLine("please enter a wanted vehicles status");
+            Console.WriteLine("please enter a wanted vehicles status, or press enter if you dont want to filter");
             wantedStatusString = Console.ReadLine();
-            //TODO: there is a problem if the string does not look like the wanted status string
+            while (!StringValidator.IsValidStatus(wantedStatusString))
+            {
+                Console.WriteLine("Wrong status, please try again");
+                wantedStatusString = Console.ReadLine();
+            }
             wantedStatus = (eMaintenanceStatus)Enum.Parse(typeof(eMaintenanceStatus), wantedStatusString);
-            printLicenseNumberFiltered(m_Garage.GetAllLicenseNumbersFiltered(wantedStatus), wantedStatusString);
+            printLicenseNumberFiltered(m_Garage.GetAllLicenseNumbers(wantedStatus), wantedStatusString);
         }
 
         private void printLicenseNumberFiltered(List<string> licenseNumberByFilter, string i_wantedStatusString)
@@ -137,12 +142,7 @@ namespace UI
             string licenceNumber;
 
             Console.WriteLine("Please enter the license Number:");
-            licenceNumber = Console.ReadLine();
-            while (!StringValidator.IsValidLicenseNumber(licenceNumber))
-            {
-                Console.WriteLine("License number is not valid, please try again");
-                licenceNumber = Console.ReadLine();
-            }
+            GetValidDataFromUser(out licenceNumber, StringValidator.IsValidLicenseNumber);
 
             return licenceNumber;
         }
@@ -156,5 +156,34 @@ namespace UI
                 Console.WriteLine($"Current Air Pressure Status: {currWheel.CurrAirPressure}");
             }
         }
+
+        /// <summary>
+        /// Continuously prompts the user until valid data is provided.
+        /// </summary>
+        /// <typeparam name="T">The type of data to collect.</typeparam>
+        /// <param name="o_OutVal">The validated output value.</param>
+        /// <param name="ValidatorFunc">The validation function to apply.</param>
+        private void GetValidDataFromUser<T>(out T o_OutVal, Func<string, (bool IsValid, T Value)> ValidatorFunc)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                var result = ValidatorFunc(input);
+
+                if (result.IsValid)
+                {
+                    o_OutVal = result.Value;
+                    Console.WriteLine("Input accepted.");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+            }
+        }
     }
+
+}
 }

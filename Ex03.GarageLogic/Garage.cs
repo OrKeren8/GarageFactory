@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using static Ex03.GarageLogic.Utils;
+using Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -8,9 +8,6 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; }
-
-        
-        
 
         public bool IsVehicleExist(string i_LicenseNumber, bool i_ThrowException=false)
         {
@@ -25,36 +22,57 @@ namespace Ex03.GarageLogic
             return isExist;
         }
 
-        public Dictionary<string, string> GetPropertiesForVehicleCreation()
-        {
-            return 
-        }
-
         public void AddNewVehicle(Vehicle i_Vehicle) 
         {
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
 
         }
 
-        public List<string> GetAllLicenseNumbersFiltered(eMaintenanceStatus i_Filter)
+        /// <summary>
+        /// get all license numbers of the vehicles in the garage
+        /// filtering is optional
+        /// </summary>
+        /// <param name="i_Filter">filter by maintenace status</param>
+        /// <returns></returns>
+        public List<string> GetAllLicenseNumbers(eMaintenanceStatus? i_Filter)
         {
-            ///this funcition returns all of the license numbers of all of the cars in the garage
-            ///
             return new List<string>();
         }
 
+        /// <summary>
+        ///change status of a car in the garage to a new state
+        ///the car is chosen by input license number
+        /// </summary>
+        /// <param name="i_LicenseNumber">the license number of the vehicle to change the status to</param>
+        /// <param name="i_Status">the desired status</param>
         public void ChangeStatus(string i_LicenseNumber, eMaintenanceStatus i_Status)
         {
-            ///change the statis of a car in the garage to new state
-            ///the car is chosen by input license number
-
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
             Vehicles[i_LicenseNumber].ChangeStatus(i_Status);
         }
 
+        /// <summary>
+        /// check if the license number is exist and if it is it fill it to maximum
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <exception cref="AppException"></exception>
         public void FillWheelsToTheMax(string i_LicenseNumber)
         {
             ///fill air in a specific car to the max
+            if (!IsVehicleExist(i_LicenseNumber))
+            {
+                throw new Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", ErrorCode.VehiceNotExist);
+            }
+            else
+            {
+                MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
+                foreach(Wheel wheel in currVehicle.Vehicle.Wheels)
+                {
+                    wheel.FillAir(wheel.MaxAirPressure - wheel.CurrAirPressure);
+                }
+
+            }
+            
         }
 
         public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)
@@ -64,7 +82,7 @@ namespace Ex03.GarageLogic
 
         public Dictionary<string, string> GetVehicleData(string i_LicenseNumber)
         {
-            return m_Vehicles[i_LicenseNumber].GetInfo();
+            return Vehicles[i_LicenseNumber].GetInfo();
         }
 
     }

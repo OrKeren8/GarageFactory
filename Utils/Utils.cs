@@ -1,8 +1,7 @@
 ﻿
 using System;
-using System.Collections.Generic;
 
-namespace Ex03.GarageLogic
+namespace Utils
 {
     public class Utils
     {
@@ -20,7 +19,10 @@ namespace Ex03.GarageLogic
         public enum ErrorCode
         {
             VehicleTypeNotExist = 1001,
-            VehiceNotExist = 1002
+            VehiceNotExist = 1002,
+
+
+            TooManyInvalidInputs = 2000
         }
 
         public class AppException : Exception
@@ -33,8 +35,5 @@ namespace Ex03.GarageLogic
                 ErrorCode = errorCode;
             }
         }
-
-        
-
     }
 }

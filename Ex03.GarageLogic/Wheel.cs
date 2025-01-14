@@ -5,16 +5,16 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private string m_Manufacturer;
-        private float m_CurrAirPressure;
-        private float m_MaxAirPressure;
+        public string Manufacturer { get; private set; }
+        public float CurrAirPressure {  get; private set; }
+        public float MaxAirPressure {  get; private set; }
 
         public Dictionary<string, string> GetInfo()
         {
             var info = new Dictionary<string, string>();
             
-            info["Manufacturer"] = m_Manufacturer;
-            info["Air Pressure"] = m_CurrAirPressure.ToString();
+            info["Manufacturer"] = Manufacturer;
+            info["Air Pressure"] = CurrAirPressure.ToString();
 
             return info;
         }
@@ -22,26 +22,26 @@ namespace Ex03.GarageLogic
         public void FillAir(float i_AditionalPressure)
         {
             //this function fill the wheel with extra air if maximum pressure does not exceed
-            if (m_CurrAirPressure + i_AditionalPressure > m_MaxAirPressure)
+            if (CurrAirPressure + i_AditionalPressure > MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(m_MaxAirPressure, 0);
+                throw new ValueOutOfRangeException(MaxAirPressure, 0);
             }
             else
             {
-                m_CurrAirPressure += i_AditionalPressure;
+                CurrAirPressure += i_AditionalPressure;
             }
 
         }
 
-        public virtual Dictionary<string, FieldDescriptor> GetWheelSchema()
+        public virtual Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+            Dictionary<string, FieldDescriptor> wheelSchema = new Dictionary<string, FieldDescriptor>();
 
-            schema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
-            schema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = false };
-            schema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
+            wheelSchema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
+            wheelSchema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = false };
+            wheelSchema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
 
-            return schema;
+            return wheelSchema;
         }
     }
 }
