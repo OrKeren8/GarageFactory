@@ -10,7 +10,8 @@
             InflateVehicleTiresToMaximum,
             RefuelFuelVehicle,
             ChargeElectricVehicle,
-            GetDetailsOfVehicleByLicenseNumber
+            GetDetailsOfVehicleByLicenseNumber,
+            Exit
         }
     }
 }

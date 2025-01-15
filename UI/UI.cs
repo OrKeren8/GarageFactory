@@ -14,22 +14,34 @@ namespace UI
         
         public void ApplicationMainLoop()
         {
-            getUserMenuSelection();
+            bool exit = false;
+            Menu.eMenuSelect userChoice;
 
-            freezeScreenTillEnter();
+
+            while (!exit)
+            {
+                userChoice = getUserMenuSelection();
+                System.Console.Clear();
+                switch(userChoice) {
+                    case Menu.eMenuSelect.Exit:
+                        exit = true;
+                        break;
+                }
+            }
         }
 
         private void printMainMenu()
         {
             Console.WriteLine("Hello! Please choose one of the following option:");
-            Console.WriteLine("1. Enter new vehicle to the garage");
-            Console.WriteLine("2. Show all vehicle's license number, with filtering option");
-            Console.WriteLine("3. Change vehicle status");
-            Console.WriteLine("4. Inflate the vehicle's tires to maximum pressure");
-            Console.WriteLine("5. Refuel a vehicle powered by fuel");
-            Console.WriteLine("6. Charge electric vehicle");
-            Console.WriteLine("7. Retrieve complete details of a vehicle by its license number");
-
+            Console.WriteLine($"{Menu.eMenuSelect.EnterNewVehicleToGarage.GetHashCode()}. Enter new vehicle to the garage");
+            Console.WriteLine($"{Menu.eMenuSelect.ShowAllVehicleLicenseNumber.GetHashCode()}. Show all vehicle's license number, with filtering option");
+            Console.WriteLine($"{Menu.eMenuSelect.ChangeVehicleStatus.GetHashCode()}. Change vehicle status");
+            Console.WriteLine($"{Menu.eMenuSelect.InflateVehicleTiresToMaximum.GetHashCode()}. Inflate the vehicle's tires to maximum pressure");
+            Console.WriteLine($"{Menu.eMenuSelect.RefuelFuelVehicle.GetHashCode()}. Refuel a vehicle powered by fuel");
+            Console.WriteLine($"{Menu.eMenuSelect.ChargeElectricVehicle.GetHashCode()}. Charge electric vehicle");
+            Console.WriteLine($"{Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber.GetHashCode()}. Retrieve complete details of a vehicle by its license number");
+            Console.WriteLine($"{Menu.eMenuSelect.Exit.GetHashCode()}. Exit");
+            Console.WriteLine();
         }
 
         private void freezeScreenTillEnter()
@@ -174,7 +186,6 @@ namespace UI
                 if (result.IsValid)
                 {
                     o_OutVal = result.Value;
-                    Console.WriteLine("Input accepted.");
                     break;
                 }
                 else
