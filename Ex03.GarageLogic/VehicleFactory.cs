@@ -37,6 +37,18 @@ namespace Ex03.GarageLogic
             return vehiclesTypesNamesAndValues;
         }
 
+        public List<string> GetAllFueledType()
+        {
+            List<string> vehiclesFeulOptions = new List<string>();
+            foreach (eFuelType fuelType in Enum.GetValues(typeof(eFuelType)))
+            {
+                vehiclesFeulOptions.Add($"{fuelType.GetHashCode()}. {fuelType}");
+            }
+
+            return vehiclesFeulOptions;
+        }
+        
+
         /// <summary>
         /// creates new vehivle from specific type
         /// </summary>

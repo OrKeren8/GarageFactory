@@ -47,8 +47,8 @@ namespace UI
             Console.WriteLine($"{Menu.eMenuSelect.ShowAllVehicleLicenseNumber.GetHashCode()}. Show all vehicle's license number, with filtering option"); //need to add function that returned all of the vehicle in the garage
             Console.WriteLine($"{Menu.eMenuSelect.ChangeVehicleStatus.GetHashCode()}. Change vehicle status"); // need to check
             Console.WriteLine($"{Menu.eMenuSelect.InflateVehicleTiresToMaximum.GetHashCode()}. Inflate the vehicle's tires to maximum pressure"); //need to check
-            //Console.WriteLine($"{Menu.eMenuSelect.RefuelFuelVehicle.GetHashCode()}. Refuel a vehicle powered by fuel");
-            //Console.WriteLine($"{Menu.eMenuSelect.ChargeElectricVehicle.GetHashCode()}. Charge electric vehicle");
+            Console.WriteLine($"{Menu.eMenuSelect.RefuelFuelVehicle.GetHashCode()}. Refuel a vehicle powered by fuel"); //TODO: I created fuelVehicleUI but need to complete
+            Console.WriteLine($"{Menu.eMenuSelect.ChargeElectricVehicle.GetHashCode()}. Charge electric vehicle"); //TODO: I created chargeVehicleUI but need to complete
             //Console.WriteLine($"{Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber.GetHashCode()}. Retrieve complete details of a vehicle by its license number");
             Console.WriteLine($"{Menu.eMenuSelect.Exit.GetHashCode()}. Exit");
             Console.WriteLine();
@@ -128,27 +128,27 @@ namespace UI
             eVehiclesTypes userTypeChoice;
 
             Console.WriteLine("Please enter your vehicle type:");
-            printingVehicleTypes(ClassFactory.GetAllVehicleTypeNamesAndValues());
+            Utils.General.PrintingStringList(ClassFactory.GetAllVehicleTypeNamesAndValues());
             GetValidDataFromUser(out userTypeChoice, StringValidator.CheckStringOfEnum<eVehiclesTypes>);
 
             
             return userTypeChoice;
         }
 
-        private void printingVehicleTypes(List<string> vehicleTypesNamesAndValuesList)
+        private void printingStringList(List<string> vehicleStringList)
         {
-            foreach (string vehicleTypeNameAndValue in vehicleTypesNamesAndValuesList)
+            foreach (string currentString in vehicleStringList)
             {
-                Console.WriteLine($"{vehicleTypeNameAndValue}");
+                Console.WriteLine($"{currentString}");
             }
         }
 
 
-        private void showAllLicensedNumber(List<Vehicle> allVehicleList)
+        private void showAllLicensedNumber()
         {
             eMaintenanceStatus wantedStatus;
             string wantedStatusString;
-            
+            List<Vehicle> allVehicleList = VehicleGarage.GetAllVehiclesList(); 
             Console.WriteLine("please enter a wanted vehicles status, or press enter if you dont want to filter");
             wantedStatusString = Console.ReadLine();
             while (!StringValidator.IsValidStatus(wantedStatusString))
@@ -240,7 +240,32 @@ namespace UI
                 }
             }
         }
-        
+
+        private void fuelVehicleUI()
+        {
+            string userLicensNumber = getLicenseNumberFromUser();
+            eFuelType fuelTypeChoice;
+            float fuelAmount;
+            CheckIfVehicleTypeIsByFuel(userLicensNumber); //TODO: need to add function that check if its run by fuel
+            Console.WriteLine("Please enter your fuel type:");
+            Utils.General.PrintingStringList(ClassFactory.GetAllFueledType());
+            GetValidDataFromUser(out fuelTypeChoice, StringValidator.CheckStringOfEnum<eFuelType>);
+            Console.WriteLine("Please enter the amount of the fuel you want:");
+            fuelAmount = float.Parse(Console.ReadLine());
+            VehicleGarage.FuelVehicle(userLicensNumber, fuelTypeChoice, fuelAmount);
+            Console.WriteLine("Successfully fueled");
+        }
+
+        private void chargeVehicleUI()
+        {
+            string userLicensNumber = getLicenseNumberFromUser();
+            float amountOfMinutes;
+            CheckIfVehicleTypeIsByBattery(userLicensNumber); //TODO: need to add function that check if its run by battery
+            Console.WriteLine("Please enter how many minutes you want to charge:");
+            amountOfMinutes = float.Parse(Console.ReadLine());
+            VehicleGarage.ChargeElectricBattery(userLicensNumber, amountOfMinutes);
+            Console.WriteLine("Successfully charged");
+        }
     }
 
 }

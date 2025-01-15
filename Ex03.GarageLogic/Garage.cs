@@ -79,12 +79,20 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)
+        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_Amount)
         {
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
 
             MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
-            currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelTpe);
+            currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelType);
+        }
+
+        public void ChargeElectricBattery(string i_LicenseNumber, float i_AmountOfMinutes)
+        {
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+
+            MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
+            currVehicle.Vehicle.EnergyTank.Fill(i_AmountOfMinutes);
         }
 
         public void GetVehicleData(string i_LicenseNumber)
@@ -96,6 +104,18 @@ namespace Ex03.GarageLogic
         {
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
             return Vehicles[i_LicenseNumber].Vehicle.GetSchema();
+        }
+
+        public List<Vehicle> GetAllVehiclesList()
+        {
+            List<Vehicle> allVehicles = new List<Vehicle>();
+
+            foreach (var maintainedVehicle in Vehicles.Values)
+            {
+                allVehicles.Add(maintainedVehicle.Vehicle);
+            }
+
+            return allVehicles;
         }
 
     }
