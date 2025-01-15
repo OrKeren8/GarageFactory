@@ -79,7 +79,7 @@ namespace UI
         public static bool IsValidStatus(string i_StatusInput)//todo
         {
             bool isValid = true;
-            if((i_StatusInput.ToLower()!= "in progress") || (i_StatusInput.ToLower() != "fixed") || (i_StatusInput.ToLower() != "paid") || (i_StatusInput.ToLower() != ""))
+            if((i_StatusInput.ToLower()!= "in progress") && (i_StatusInput.ToLower() != "fixed") && (i_StatusInput.ToLower() != "paid") && (i_StatusInput.ToLower() != ""))
             {
                 isValid=false;
             }

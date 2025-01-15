@@ -29,6 +29,12 @@ namespace UI
                     case Menu.eMenuSelect.EnterNewVehicleToGarage:
                         addVehicleToGarage();
                         break;
+                    case Menu.eMenuSelect.ChangeVehicleStatus:
+                        changeVehicleStatus();
+                        break;
+                    case Menu.eMenuSelect.InflateVehicleTiresToMaximum:
+                        FillWheelsToTheMax();
+                        break;
                 }
             }
         }
@@ -38,9 +44,9 @@ namespace UI
             //TODO: should print the strings from the menu.
             Console.WriteLine("Hello! Please choose one of the following option:");
             //Console.WriteLine($"{Menu.eMenuSelect.EnterNewVehicleToGarage.GetHashCode()}. Enter new vehicle to the garage");
-            Console.WriteLine($"{Menu.eMenuSelect.ShowAllVehicleLicenseNumber.GetHashCode()}. Show all vehicle's license number, with filtering option");
-            Console.WriteLine($"{Menu.eMenuSelect.ChangeVehicleStatus.GetHashCode()}. Change vehicle status");
-            Console.WriteLine($"{Menu.eMenuSelect.InflateVehicleTiresToMaximum.GetHashCode()}. Inflate the vehicle's tires to maximum pressure");
+            Console.WriteLine($"{Menu.eMenuSelect.ShowAllVehicleLicenseNumber.GetHashCode()}. Show all vehicle's license number, with filtering option"); //need to add function that returned all of the vehicle in the garage
+            Console.WriteLine($"{Menu.eMenuSelect.ChangeVehicleStatus.GetHashCode()}. Change vehicle status"); // need to check
+            Console.WriteLine($"{Menu.eMenuSelect.InflateVehicleTiresToMaximum.GetHashCode()}. Inflate the vehicle's tires to maximum pressure"); //need to check
             //Console.WriteLine($"{Menu.eMenuSelect.RefuelFuelVehicle.GetHashCode()}. Refuel a vehicle powered by fuel");
             //Console.WriteLine($"{Menu.eMenuSelect.ChargeElectricVehicle.GetHashCode()}. Charge electric vehicle");
             //Console.WriteLine($"{Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber.GetHashCode()}. Retrieve complete details of a vehicle by its license number");
@@ -138,7 +144,7 @@ namespace UI
         }
 
 
-        private void showAllLicensedNumber()
+        private void showAllLicensedNumber(List<Vehicle> allVehicleList)
         {
             eMaintenanceStatus wantedStatus;
             string wantedStatusString;
@@ -151,7 +157,7 @@ namespace UI
                 wantedStatusString = Console.ReadLine();
             }
             wantedStatus = (eMaintenanceStatus)Enum.Parse(typeof(eMaintenanceStatus), wantedStatusString);
-            printLicenseNumberFiltered(VehicleGarage.GetAllLicenseNumbers(wantedStatus), wantedStatusString);
+            printLicenseNumberFiltered(VehicleGarage.GetAllLicenseNumbers(wantedStatus, allVehicleList), wantedStatusString);
         }
 
         private void printLicenseNumberFiltered(List<string> licenseNumberByFilter, string i_wantedStatusString)
@@ -234,6 +240,7 @@ namespace UI
                 }
             }
         }
+        
     }
 
 }
