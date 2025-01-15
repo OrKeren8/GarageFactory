@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Utils;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace UI
 {
@@ -10,9 +11,50 @@ namespace UI
         private VehicleFactory m_ClassFactory = new VehicleFactory();
         private Garage m_Garage = new Garage();
 
-        public void StartApplication()
+        
+        public void ApplicationMainLoop()
         {
+            printMainMenu();
+            getUserSelection();
 
+            freezeScreenTillEnter();
+        }
+
+        private void printMainMenu()
+        {
+            Console.WriteLine("Hello! Please choose one of the following option:");
+            Console.WriteLine("1. Enter new vehicle to the garage");
+            Console.WriteLine("2. Show all vehicle's license number, with filtering option");
+            Console.WriteLine("3. Change vehicle status");
+            Console.WriteLine("4. Inflate the vehicle's tires to maximum pressure");
+            Console.WriteLine("5. Refuel a vehicle powered by fuel");
+            Console.WriteLine("6. Charge electric vehicle");
+            Console.WriteLine("7. Retrieve complete details of a vehicle by its license number");
+
+        }
+
+        private void freezeScreenTillEnter()
+        {
+            Console.WriteLine("\n\nEnter to close the program");
+            Console.ReadLine();
+        }
+
+        private Menu.eMenuSelect getUserSelection()
+        {
+            Menu.eMenuSelect userSelection;
+            string userStringChoice;
+            int userIntChoice;
+
+            printMainMenu();
+            userStringChoice = Console.ReadLine();
+            while (!StringValidator.CheckUserMainMenuSelection(userStringChoice))
+            {
+                Console.WriteLine("Wrong selection, please try again:");
+                userStringChoice = Console.ReadLine();
+            }
+            userIntChoice = int.Parse(userStringChoice);
+            userSelection = (Menu.eMenuSelect)userIntChoice;
+            return userSelection;
         }
 
         private void printVehicleInfo(string i_LicenseNumber)
@@ -30,36 +72,6 @@ namespace UI
             {
                 Console.WriteLine($"{item.Key}: {item.Value}");
             }
-        }
-
-        private void printMainMenu()
-        {
-            Console.WriteLine("Hello! Please choose one of the following option:");
-            Console.WriteLine("1. Enter new vehicle to the garage");
-            Console.WriteLine("2. Show all vehicle's license number, with filtering option");
-            Console.WriteLine("3. Change vehicle status");
-            Console.WriteLine("4. Inflate the vehicle's tires to maximum pressure");
-            Console.WriteLine("5. Refuel a vehicle powered by fuel");
-            Console.WriteLine("6. Charge electric vehicle");
-            Console.WriteLine("7. Retrieve complete details of a vehicle by its license number");
-
-        }
-        private Menu.eMenuSelect getUserSelection()
-        {
-            Menu.eMenuSelect userSelection;
-            string userStringChoice;
-            int userIntChoice;
-
-            printMainMenu();
-            userStringChoice = Console.ReadLine();
-            while (!StringValidator.CheckUserMainMenuSelection(userStringChoice))
-            {
-                Console.WriteLine("Wrong selection, please try again:");
-                userStringChoice = Console.ReadLine();
-            }
-            userIntChoice = int.Parse(userStringChoice);
-            userSelection = (Menu.eMenuSelect)userIntChoice;
-            return userSelection;
         }
 
         private void addVehicleToGarageNewOrOld()
