@@ -14,8 +14,7 @@ namespace UI
         
         public void ApplicationMainLoop()
         {
-            printMainMenu();
-            getUserSelection();
+            getUserMenuSelection();
 
             freezeScreenTillEnter();
         }
@@ -39,22 +38,14 @@ namespace UI
             Console.ReadLine();
         }
 
-        private Menu.eMenuSelect getUserSelection()
+        private Menu.eMenuSelect getUserMenuSelection()
         {
-            Menu.eMenuSelect userSelection;
-            string userStringChoice;
-            int userIntChoice;
+            Menu.eMenuSelect userChoice;
 
             printMainMenu();
-            userStringChoice = Console.ReadLine();
-            while (!StringValidator.CheckUserMainMenuSelection(userStringChoice))
-            {
-                Console.WriteLine("Wrong selection, please try again:");
-                userStringChoice = Console.ReadLine();
-            }
-            userIntChoice = int.Parse(userStringChoice);
-            userSelection = (Menu.eMenuSelect)userIntChoice;
-            return userSelection;
+            GetValidDataFromUser(out userChoice, StringValidator.CheckUserMainMenuSelection);
+            
+            return userChoice;
         }
 
         private void printVehicleInfo(string i_LicenseNumber)

@@ -1,21 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Utils;
 
 namespace UI
 {
     public class StringValidator
     {
-        public static bool CheckUserMainMenuSelection(string i_UserSelection)
+        public static (bool, Menu.eMenuSelect) CheckUserMainMenuSelection(string i_UserSelection)
         {
             bool isValid = false;
-            if (int.Parse(i_UserSelection) >= 1 || int.Parse(i_UserSelection) <= 7)
+            int digit, maxEnumVal;
+            Menu.eMenuSelect userSelect = 0;
+
+            maxEnumVal = Utils.General.GetMaxEnumValue<Menu.eMenuSelect>();
+
+            (isValid, digit) = isDigitInRange(i_UserSelection, 0, maxEnumVal);
+
+            if (isValid)
             {
-                isValid = true;
+                userSelect = (Menu.eMenuSelect)digit;
             }
-            return isValid;
+
+            return (isValid, userSelect);
+        }
+
+        public static (bool, int) isDigitInRange(string i_Digit, int i_Min, int i_Max)
+        {
+            bool isDigit;
+            int digit = 0;
+
+            isDigit = int.TryParse(i_Digit, out digit);
+            if (!isDigit)
+            {
+                digit = 0;
+            }
+            else if((digit >= i_Min) && (digit <= i_Max))
+            {
+                isDigit = true;
+                digit = int.Parse(i_Digit);
+            }
+
+            return (isDigit, digit);
         }
 
         static public (bool, string) IsValidLicenseNumber(string i_LicenseNumber)
