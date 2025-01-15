@@ -14,6 +14,10 @@ namespace Ex03.GarageLogic
     {
         private eColor Color {  get; set; }
         private int NumOfDoors {  get; set; }
+
+
+        public Car(string i_LicenseNumber) : base(i_LicenseNumber) { }
+
         public void InitCar(eColor i_Color,
                             int i_NumOfDoors,
                             string i_LicenseNumber,

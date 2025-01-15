@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             return isExist;
         }
 
-        public void AddNewVehicle(Vehicle i_Vehicle) 
+        public void AddVehicle(Vehicle i_Vehicle) 
         {
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
             if (IsVehicleExist(i_Vehicle.LicenseNumber))
@@ -31,10 +31,9 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                MaintainedVehicle vehicleToAdd = Vehicles[i_Vehicle.LicenseNumber];
+                MaintainedVehicle vehicleToAdd = new MaintainedVehicle(i_Vehicle);
                 Vehicles.Add(i_Vehicle.LicenseNumber, vehicleToAdd);
             }
-
         }
 
         /// <summary>
@@ -82,6 +81,12 @@ namespace Ex03.GarageLogic
         public void GetVehicleData(string i_LicenseNumber)
         {
             //return Vehicles[i_LicenseNumber].GetInfo();
+        }
+
+        public virtual Dictionary<string, FieldDescriptor> GetVehicleSchema(string i_LicenseNumber)
+        {
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            return Vehicles[i_LicenseNumber].Vehicle.GetSchema();
         }
 
     }

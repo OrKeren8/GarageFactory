@@ -13,14 +13,18 @@
         public eMaintenanceStatus Status { get; private set; }
         public Vehicle Vehicle {  get; private set; } 
 
-        public MaintainedVehicle(string i_OwnerName,
-                                 string i_PhoneNumber, 
-                                 Vehicle i_Vehicle)
+        
+        public MaintainedVehicle(Vehicle i_Vehicle)
+        {
+            Vehicle = i_Vehicle;
+        }
+
+        public void initMaintainedVehicle(  string i_OwnerName,
+                                            string i_PhoneNumber)
         {
             OwnerName = i_OwnerName;
             PhoneNumber = i_PhoneNumber;
             Status = eMaintenanceStatus.InProgress;
-            Vehicle = i_Vehicle;
         }
 
         public void ChangeStatus(eMaintenanceStatus i_Status)

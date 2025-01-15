@@ -1,23 +1,24 @@
-﻿using System;
+﻿using Ex03.GarageLogic;
+using System;
 using Utils;
 
 namespace UI
 {
     public class StringValidator
     {
-        public static (bool, Menu.eMenuSelect) CheckUserMainMenuSelection(string i_UserSelection)
+        public static (bool, T) CheckStringOfEnum<T>(string i_UserSelection) where T : Enum
         {
             bool isValid = false;
             int digit, maxEnumVal;
-            Menu.eMenuSelect userSelect = 0;
+            T userSelect = default;
 
-            maxEnumVal = Utils.General.GetMaxEnumValue<Menu.eMenuSelect>();
+            maxEnumVal = Utils.General.GetMaxEnumValue<T>();
 
             (isValid, digit) = isDigitInRange(i_UserSelection, 0, maxEnumVal);
 
             if (isValid)
             {
-                userSelect = (Menu.eMenuSelect)digit;
+                userSelect = (T)Enum.ToObject(typeof(T), digit);
             }
 
             return (isValid, userSelect);
@@ -37,6 +38,10 @@ namespace UI
             {
                 isDigit = true;
                 digit = int.Parse(i_Digit);
+            }
+            else
+            {
+                isDigit = false;
             }
 
             return (isDigit, digit);
@@ -81,6 +86,7 @@ namespace UI
             return isValid;
 
         }
+
     }
 
 }

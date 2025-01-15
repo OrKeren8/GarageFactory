@@ -9,6 +9,9 @@ namespace Ex03.GarageLogic
         private float m_MaxLoadVolume;
         private EnergyTank m_EnergyTank;
 
+        public Track(string i_LicenseNumber) : base(i_LicenseNumber) { }
+
+
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
             Dictionary<string, FieldDescriptor> trackSchema = base.GetSchema();

@@ -8,8 +8,8 @@ namespace UI
 {
     public class UI
     {
-        private VehicleFactory m_ClassFactory = new VehicleFactory();
-        private Garage m_Garage = new Garage();
+        private VehicleFactory ClassFactory = new VehicleFactory();
+        private Garage VehicleGarage = new Garage();
 
         
         public void ApplicationMainLoop()
@@ -26,12 +26,16 @@ namespace UI
                     case Menu.eMenuSelect.Exit:
                         exit = true;
                         break;
+                    case Menu.eMenuSelect.EnterNewVehicleToGarage:
+                        addVehicleToGarage();
+                        break;
                 }
             }
         }
 
         private void printMainMenu()
         {
+            //TODO: should print the strings from the menu.
             Console.WriteLine("Hello! Please choose one of the following option:");
             Console.WriteLine($"{Menu.eMenuSelect.EnterNewVehicleToGarage.GetHashCode()}. Enter new vehicle to the garage");
             Console.WriteLine($"{Menu.eMenuSelect.ShowAllVehicleLicenseNumber.GetHashCode()}. Show all vehicle's license number, with filtering option");
@@ -55,7 +59,7 @@ namespace UI
             Menu.eMenuSelect userChoice;
 
             printMainMenu();
-            GetValidDataFromUser(out userChoice, StringValidator.CheckUserMainMenuSelection);
+            GetValidDataFromUser(out userChoice, StringValidator.CheckStringOfEnum<Menu.eMenuSelect>);
             
             return userChoice;
         }
@@ -77,26 +81,54 @@ namespace UI
             }
         }
 
-        private void addVehicleToGarageNewOrOld()
+        private void addVehicleToGarage()
         {
             string vehicleLicenseNumber;
 
             Console.WriteLine("Please enter license number of the vehicle you want to add to the garage");
             vehicleLicenseNumber = Console.ReadLine();
-            if (!m_Garage.IsVehicleExist(vehicleLicenseNumber))
+            if (!VehicleGarage.IsVehicleExist(vehicleLicenseNumber))
             {
-                //List(Properties) = m_Garage.GetVehicleData(vehicleLicenseNumber); //TODO: i dont understand what this do?
-                //Vehicle newUserVehicle = getDataFromUser(prope);
-                //m_Garage.AddNewVehicle(newVehicle);
+                
+                createNewVehicle(vehicleLicenseNumber);
                 Console.WriteLine("Successfully added!");
             }
             else
             {
                 Console.WriteLine("The Vehicle already exist");
-                m_Garage.ChangeStatus(vehicleLicenseNumber, eMaintenanceStatus.InProgress);
+                VehicleGarage.ChangeStatus(vehicleLicenseNumber, eMaintenanceStatus.InProgress);
                 Console.WriteLine("The Status of the vehicle changed to - In Progress");
             }
         }
+
+        private void createNewVehicle(string i_LicenseNumber)
+        {
+            eVehiclesTypes vehicleType = getVehiclaTypeFromUser();
+
+            try
+            {
+                VehicleGarage.AddVehicle(ClassFactory.CreateVehicle(vehicleType, i_LicenseNumber));
+                VehicleGarage.GetVehicleData(i_LicenseNumber);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+        }
+
+        private eVehiclesTypes getVehiclaTypeFromUser()
+        {
+            eVehiclesTypes userTypeChoice;
+
+            Console.WriteLine("Please enter your vehicle type:");
+            //TODO print vehicle types
+            GetValidDataFromUser(out userTypeChoice, StringValidator.CheckStringOfEnum<eVehiclesTypes>);
+
+            
+            return userTypeChoice;
+        }
+
 
         private void showAllLicensedNumber()
         {
@@ -111,7 +143,7 @@ namespace UI
                 wantedStatusString = Console.ReadLine();
             }
             wantedStatus = (eMaintenanceStatus)Enum.Parse(typeof(eMaintenanceStatus), wantedStatusString);
-            printLicenseNumberFiltered(m_Garage.GetAllLicenseNumbers(wantedStatus), wantedStatusString);
+            printLicenseNumberFiltered(VehicleGarage.GetAllLicenseNumbers(wantedStatus), wantedStatusString);
         }
 
         private void printLicenseNumberFiltered(List<string> licenseNumberByFilter, string i_wantedStatusString)
@@ -137,7 +169,7 @@ namespace UI
                 wantedChangeStatusString = Console.ReadLine();
             }
             wantedChangeStatus = (eMaintenanceStatus)Enum.Parse(typeof(eMaintenanceStatus), wantedChangeStatusString);
-            m_Garage.ChangeStatus(licenceNumber, wantedChangeStatus);
+            VehicleGarage.ChangeStatus(licenceNumber, wantedChangeStatus);
             Console.WriteLine($"Status successfully changed to {wantedChangeStatus}!");
         }
 
@@ -145,7 +177,7 @@ namespace UI
         {
             string licenceNumber = getLicenseNumberFromUser();
 
-            m_Garage.FillWheelsToTheMax(licenceNumber);
+            VehicleGarage.FillWheelsToTheMax(licenceNumber);
             Console.WriteLine("Your wheels successfully filled!");
         }
 

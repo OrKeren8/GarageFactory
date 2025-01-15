@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Ex03.GarageLogic
 {
@@ -17,6 +18,8 @@ namespace Ex03.GarageLogic
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
         private EnergyTank m_EnergyTank;
+
+        public Motorcycle(string i_LicenseNumber) : base(i_LicenseNumber) { }
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
