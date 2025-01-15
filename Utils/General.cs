@@ -9,6 +9,5 @@ namespace Utils
         {
             return Enum.GetValues(typeof(T)).Cast<int>().Max();
         }
-        
     }
 }

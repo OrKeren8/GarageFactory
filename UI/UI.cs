@@ -122,11 +122,19 @@ namespace UI
             eVehiclesTypes userTypeChoice;
 
             Console.WriteLine("Please enter your vehicle type:");
-            //TODO print vehicle types
+            printingVehicleTypes(ClassFactory.GetAllVehicleTypeNamesAndValues());
             GetValidDataFromUser(out userTypeChoice, StringValidator.CheckStringOfEnum<eVehiclesTypes>);
 
             
             return userTypeChoice;
+        }
+
+        private void printingVehicleTypes(List<string> vehicleTypesNamesAndValuesList)
+        {
+            foreach (string vehicleTypeNameAndValue in vehicleTypesNamesAndValuesList)
+            {
+                Console.WriteLine($"{vehicleTypeNameAndValue}");
+            }
         }
 
 
