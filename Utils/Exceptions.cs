@@ -3,7 +3,7 @@ using System;
 
 namespace Utils
 {
-    public class Utils
+    public class Exceptions
     {
         public class ValueOutOfRangeException : Exception
         {
@@ -20,8 +20,7 @@ namespace Utils
         {
             VehicleTypeNotExist = 1001,
             VehiceNotExist = 1002,
-
-
+            VehicleAlreadyExist = 1003,
             TooManyInvalidInputs = 2000
         }
 

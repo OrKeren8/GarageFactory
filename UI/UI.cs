@@ -10,21 +10,18 @@ namespace UI
         private VehicleFactory m_ClassFactory = new VehicleFactory();
         private Garage m_Garage = new Garage();
 
-        public UI()
+        public void StartApplication()
         {
-        }
 
-        public void StartGragageUI()
-        {
         }
 
         private void printVehicleInfo(string i_LicenseNumber)
         {
             ///prints all of the data of a specific vehicle by its license number
 
-            Dictionary<string, string> vehicleInfo = m_Garage.GetVehicleData(i_LicenseNumber);
+            //Dictionary<string, string> vehicleInfo = m_Garage.GetVehicleData(i_LicenseNumber);
             
-            printDictionary(vehicleInfo);
+            //printDictionary(vehicleInfo);
         }
 
         private void printDictionary(Dictionary<string, string> i_VehicleInfo)
@@ -186,4 +183,4 @@ namespace UI
     }
 
 }
-}
+

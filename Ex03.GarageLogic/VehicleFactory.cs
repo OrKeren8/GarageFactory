@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using static Ex03.GarageLogic.Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -50,7 +48,7 @@ namespace Ex03.GarageLogic
                     vehicle = new Track();
                     break;
                 default:
-                    throw new AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", ErrorCode.VehicleTypeNotExist);
+                    throw new Utils.Exceptions.AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", Utils.Exceptions.ErrorCode.VehicleTypeNotExist);
             }
 
             return vehicle;

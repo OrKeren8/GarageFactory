@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using static Ex03.GarageLogic.Utils;
+﻿using System.Collections.Generic;
+using Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -25,7 +24,7 @@ namespace Ex03.GarageLogic
             //this funciton adds combustion material to the tank untill it is full
             if (m_CurrAmount + i_Amounttofill > m_MaxCapacity)
             {
-                throw new ValueOutOfRangeException(m_MaxCapacity, 0);
+                throw new Utils.Exceptions.ValueOutOfRangeException(m_MaxCapacity, 0);
             }
             else
             {

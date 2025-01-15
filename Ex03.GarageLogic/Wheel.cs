@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
         {
             if (CurrAirPressure + i_AditionalPressure > MaxAirPressure)
             {
-                throw new Utils.Utils.ValueOutOfRangeException(MaxAirPressure, 0);
+                throw new Utils.Exceptions.ValueOutOfRangeException(MaxAirPressure, 0);
             }
             else
             {

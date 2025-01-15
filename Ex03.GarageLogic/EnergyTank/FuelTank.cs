@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         Octan98
     }
 
-    internal class FuelTank : EnergyTank
+    public class FuelTank : EnergyTank
     {
         private eFuelType m_EnergyType;
         public FuelTank(float i_FuelCapacity, eFuelType i_EnergyType) : base(i_FuelCapacity)

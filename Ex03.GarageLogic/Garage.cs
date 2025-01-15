@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             isExist = Vehicles.ContainsKey(i_LicenseNumber);
             if (i_ThrowException)
             {
-                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.ErrorCode.VehiceNotExist);
             }
 
             return isExist;
@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
             if (IsVehicleExist(i_Vehicle.LicenseNumber))
             {
-                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_Vehicle.LicenseNumber}] already exist", Utils.Utils.ErrorCode.VehicleAlreadyExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_Vehicle.LicenseNumber}] already exist", Utils.Exceptions.ErrorCode.VehicleAlreadyExist);
             }
             else
             {
@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
         {
             if (!IsVehicleExist(i_LicenseNumber))
             {
-                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.ErrorCode.VehiceNotExist);
             }
             else
             {
@@ -89,12 +89,12 @@ namespace Ex03.GarageLogic
         /// <param name="i_LicenseNumber"></param>
         /// <param name="i_FuelTpe"></param>
         /// <param name="i_Amount"></param>
-        /// <exception cref="Utils.Utils.AppException"></exception>
+        /// <exception cref="Utils.Exceptions.AppException"></exception>
         public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)//TODO fix docstring and is exist not right
         {
             if (!IsVehicleExist(i_LicenseNumber))
             {
-                throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.ErrorCode.VehiceNotExist);
             }
             else
             {
@@ -105,9 +105,9 @@ namespace Ex03.GarageLogic
 
         }
 
-        public Dictionary<string, string> GetVehicleData(string i_LicenseNumber)
+        public void GetVehicleData(string i_LicenseNumber)
         {
-            return Vehicles[i_LicenseNumber].GetInfo();
+            //return Vehicles[i_LicenseNumber].GetInfo();
         }
 
     }

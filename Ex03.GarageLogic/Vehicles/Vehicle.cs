@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
         public string LicenseNumber { get; private set; }
         private string ModelName { get; set; }
         public List<Wheel> Wheels { get; set; }
-        private EnergyTank EnergyTank { get; set; }
+        public EnergyTank EnergyTank { get; set; }
 
 
         public void InitVehicle( string i_LicenseNumber,

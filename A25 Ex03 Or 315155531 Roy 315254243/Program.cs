@@ -10,8 +10,7 @@ namespace A25_Ex02_Or_315155531_Roy_315254243
         {
             UI.UI ui = new UI.UI();
 
-            ui.StartGragageUI();
-
+            ui.StartApplication();
         }
     }
 }
