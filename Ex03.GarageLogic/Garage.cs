@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 
     public class Garage
     {
-        private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; }
+        private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; } = new Dictionary<string, MaintainedVehicle>();
 
         public bool IsVehicleExist(string i_LicenseNumber, bool i_ThrowException=false)
         {
@@ -60,49 +60,23 @@ namespace Ex03.GarageLogic
             Vehicles[i_LicenseNumber].ChangeStatus(i_Status);
         }
 
-        /// <summary>
-        /// check if the license number is exist and if it is it fill it to maximum
-        /// </summary>
-        /// <param name="i_LicenseNumber"></param>
-        /// <exception cref="AppException"></exception>
-        public void FillWheelsToTheMax(string i_LicenseNumber) //TODO: docstirng fix and isvehicle call not right
+        public void FillWheelsToTheMax(string i_LicenseNumber)
         {
-            if (!IsVehicleExist(i_LicenseNumber))
-            {
-                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.ErrorCode.VehiceNotExist);
-            }
-            else
-            {
-                MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
-                foreach(Wheel wheel in currVehicle.Vehicle.Wheels)
-                {
-                    wheel.FillAir(wheel.MaxAirPressure - wheel.CurrAirPressure);
-                }
-
-            }
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
             
+            MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
+            foreach(Wheel wheel in currVehicle.Vehicle.Wheels)
+            {
+                wheel.FillAir(wheel.MaxAirPressure - wheel.CurrAirPressure);
+            }
         }
 
-        /// <summary>
-        ///Add energy to the energy tank of a vehicle
-        /// </summary>
-        /// <param name="i_LicenseNumber"></param>
-        /// <param name="i_FuelTpe"></param>
-        /// <param name="i_Amount"></param>
-        /// <exception cref="Utils.Exceptions.AppException"></exception>
-        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)//TODO fix docstring and is exist not right
+        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)
         {
-            if (!IsVehicleExist(i_LicenseNumber))
-            {
-                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.ErrorCode.VehiceNotExist);
-            }
-            else
-            {
-                MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
-                currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelTpe);
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
 
-            }
-
+            MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
+            currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelTpe);
         }
 
         public void GetVehicleData(string i_LicenseNumber)
