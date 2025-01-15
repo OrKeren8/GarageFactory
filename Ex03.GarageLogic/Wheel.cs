@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using static Ex03.GarageLogic.Utils;
+using Utils;
 
 namespace Ex03.GarageLogic
 {
@@ -19,12 +19,16 @@ namespace Ex03.GarageLogic
             return info;
         }
 
+        /// <summary>
+        /// fill the wheel with extra air, only if maximum pressure does not exceed
+        /// </summary>
+        /// <param name="i_AditionalPressure">The amount of pressure to add in PSI</param>
+        /// <exception cref="ValueOutOfRangeException">if the total pressure exceed the maximum</exception>
         public void FillAir(float i_AditionalPressure)
         {
-            //this function fill the wheel with extra air if maximum pressure does not exceed
             if (CurrAirPressure + i_AditionalPressure > MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(MaxAirPressure, 0);
+                throw new Utils.Utils.ValueOutOfRangeException(MaxAirPressure, 0);
             }
             else
             {

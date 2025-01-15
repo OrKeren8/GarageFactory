@@ -65,9 +65,8 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_LicenseNumber"></param>
         /// <exception cref="AppException"></exception>
-        public void FillWheelsToTheMax(string i_LicenseNumber)
+        public void FillWheelsToTheMax(string i_LicenseNumber) //TODO: docstirng fix and isvehicle call not right
         {
-            ///fill air in a specific car to the max
             if (!IsVehicleExist(i_LicenseNumber))
             {
                 throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
@@ -85,15 +84,14 @@ namespace Ex03.GarageLogic
         }
 
         /// <summary>
-/// get the license number and if is exist it fuel the tank by the specific fuel time in the amount he want
-/// </summary>
-/// <param name="i_LicenseNumber"></param>
-/// <param name="i_FuelTpe"></param>
-/// <param name="i_Amount"></param>
-/// <exception cref="Utils.Utils.AppException"></exception>
-        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)
+        ///Add energy to the energy tank of a vehicle
+        /// </summary>
+        /// <param name="i_LicenseNumber"></param>
+        /// <param name="i_FuelTpe"></param>
+        /// <param name="i_Amount"></param>
+        /// <exception cref="Utils.Utils.AppException"></exception>
+        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelTpe, float i_Amount)//TODO fix docstring and is exist not right
         {
-            ///Add energy to the energy tank of a vehicle
             if (!IsVehicleExist(i_LicenseNumber))
             {
                 throw new Utils.Utils.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Utils.ErrorCode.VehiceNotExist);
