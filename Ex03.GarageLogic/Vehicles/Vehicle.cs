@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
             LicenseNumber = i_Schema["License Number"].Value.ToString();
-            ModelName = i_Schema["Model name"].Value.ToString();
+            ModelName = i_Schema["Model Name"].Value.ToString();
             foreach (Wheel wheel in Wheels)
             {
                 wheel.Init(i_Schema);

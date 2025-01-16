@@ -7,7 +7,6 @@ namespace Ex03.GarageLogic
     {
         private bool m_IceLoad;
         private float m_MaxLoadVolume;
-        private EnergyTank m_EnergyTank;
 
         public Track(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) : base(i_LicenseNumber, i_Wheels, i_EnergyTank) { }
 

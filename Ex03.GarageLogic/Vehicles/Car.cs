@@ -20,7 +20,7 @@ namespace Ex03.GarageLogic
 
         public override void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            this.NumOfDoors = (int)i_Schema["Amount of doors"].Value;
+            this.NumOfDoors = (int)i_Schema["Amount Of Doors"].Value;
             this.Color = (eColor)i_Schema["Color"].Value;
         }
 
@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, FieldDescriptor> carSchema = base.GetSchema();
 
             carSchema["Color"] = new FieldDescriptor { StringDescription = "Color", Type = typeof(eColor), IsRequired = true};
-            carSchema["Amount of doors"] = new FieldDescriptor { StringDescription = "Amount of doors", Type = typeof(int), IsRequired = true };
+            carSchema["Amount Of Doors"] = new FieldDescriptor { StringDescription = "Amount Of Doors", Type = typeof(int), IsRequired = true };
 
             return carSchema;
         }

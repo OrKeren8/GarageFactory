@@ -254,7 +254,8 @@ namespace UI
             float fuelAmount;
             //CheckIfVechicleTypeIsByFuel(userLicensNumber); //TODO: need to add function that check if its run by fuel
             Console.WriteLine("Please enter your fuel type:");
-            Utils.General.PrintingStringList(VehicleFactory.GetAllFueledType());
+            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eFuelType>());
+            //Utils.General.PrintingStringList(VehicleFactory.GetAllFueledType());
             GetValidDataFromUser(out fuelTypeChoice, StringValidator.CheckStringOfEnum<eFuelType>);
             Console.WriteLine("Please enter the amount of the fuel you want:");
             fuelAmount = float.Parse(Console.ReadLine());

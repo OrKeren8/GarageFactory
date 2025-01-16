@@ -28,8 +28,8 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, FieldDescriptor> electricTankSchema = new Dictionary<string, FieldDescriptor>();
 
-            electricTankSchema["Battery Capacity"] = new FieldDescriptor { StringDescription = "Battery Maximum Capacity in precentage", Type = typeof(float), IsRequired = true }; //not sure if needed because its 100
-            electricTankSchema["Current Battery Precentage"] = new FieldDescriptor { StringDescription = "Current Battery Precentage that left", Type = typeof(float), IsRequired = true };
+            electricTankSchema["Battery Capacity"] = new FieldDescriptor { StringDescription = "Battery Maximum Capacity In Hours", Type = typeof(float), IsRequired = true }; //not sure if needed because its 100
+            electricTankSchema["Current Battery Precentage"] = new FieldDescriptor { StringDescription = "Current Battery Hours That Left", Type = typeof(float), IsRequired = true };
             return electricTankSchema;
         }
     }

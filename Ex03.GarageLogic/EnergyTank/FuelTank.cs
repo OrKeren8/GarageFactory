@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, FieldDescriptor> fuelTankSchema = new Dictionary<string, FieldDescriptor>();
 
             fuelTankSchema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = true };
-            fuelTankSchema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current fuel Amount in litters", Type = typeof(float), IsRequired = true };
+            fuelTankSchema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true };
             return fuelTankSchema;
         }
 
