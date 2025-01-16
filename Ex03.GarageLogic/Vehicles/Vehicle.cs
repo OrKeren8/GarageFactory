@@ -9,7 +9,9 @@ namespace Ex03.GarageLogic
         public string LicenseNumber { get; private set; }
         private string ModelName { get; set; }
         public List<Wheel> Wheels { get; set; }
-        public EnergyTank EnergyTank { get; set; }
+        public EnergyTank EnergyTank { get; set; } = null;
+
+        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
         
 
         public Vehicle(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) 
@@ -32,33 +34,18 @@ namespace Ex03.GarageLogic
 
         public virtual Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+            
+            if(Schema == null)
+            {
+                Schema = new Dictionary<string, FieldDescriptor>();
 
-            schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
-            var mergedSchema = schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            var mergedSchemanewer = mergedSchema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                Schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
+                var mergedSchema = Schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                var mergedSchemanewer = mergedSchema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                Schema = mergedSchema;
+            }
 
-
-            return mergedSchemanewer;
+            return Schema;
         }
-
-        public virtual Dictionary<string, string> GetInfo()
-        {
-            Dictionary<string, string> info = new Dictionary<string, string>();
-
-            info["License number"] = LicenseNumber.ToString();
-            info["Model name"] = ModelName.ToString();
-
-            info.Concat(EnergyTank.GetInfo());
-            info.Concat(Wheels[0].GetInfo());
-
-            return info;
-        }
-
-        
-
-        
-
-
     }
 }

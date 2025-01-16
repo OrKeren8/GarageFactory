@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
                     break;
                 case eVehiclesTypes.ElectricMotorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
-                    fillDefaultMotorcycleData(vehicle.GetSchema());
+                    fillDefaultElectricMotorcycleData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Track:
                     vehicle = new Track(I_LicenseNumber, createWheelsList(Conf.TrackAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));

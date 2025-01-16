@@ -39,6 +39,10 @@ namespace UI
                     case Menu.eMenuSelect.ChargeElectricVehicle:
                         this.chargeVehicleBattery();
                         break;
+                    case Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber:
+                        this.printVehicleInfo();
+                        break;
+
                 }
             }
         }
@@ -74,13 +78,16 @@ namespace UI
             return userChoice;
         }
 
-        private void printVehicleInfo(string i_LicenseNumber)
+        private void printVehicleInfo()
         {
             ///prints all of the data of a specific vehicle by its license number
+            string licenseNumber = getLicenseNumberFromUser();
+            Dictionary<string, FieldDescriptor> schema = this.VehicleFactory.Garage.GetVehicleData(licenseNumber);
 
-            //Dictionary<string, string> vehicleInfo = m_Garage.GetVehicleData(i_LicenseNumber);
-            
-            //printDictionary(vehicleInfo);
+            foreach (FieldDescriptor field in schema.Values)
+            {
+                Console.WriteLine($"{field.StringDescription}: {field.Value}");
+            }
         }
 
         private void printDictionary(Dictionary<string, string> i_VehicleInfo)
@@ -111,7 +118,7 @@ namespace UI
             }
         }
 
-        private void createNewVehicle(string i_LicenseNumber)
+        private void createNewVehicle(/*out bool checkIfValid,*/ string i_LicenseNumber)
         {
             eVehiclesTypes vehicleType = getVehiclaTypeFromUser();
             Dictionary<string, FieldDescriptor> vehicleSchema;
@@ -120,6 +127,10 @@ namespace UI
             vehicleSchema = VehicleFactory.CreateVehicle(vehicleType, i_LicenseNumber);
             fillSchemaData(vehicleSchema);
             VehicleFactory.InitVehicle(i_LicenseNumber, vehicleSchema);
+           // checkIfValid = CheckVehicleParamValid();
+            
+
+
 
         }
 

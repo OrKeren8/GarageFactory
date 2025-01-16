@@ -16,11 +16,8 @@ namespace Ex03.GarageLogic
     {
         private eFuelType m_FuelType;
         private readonly eEnergyTankType EnergyTankType = eEnergyTankType.FuelTank;
+        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
 
-        /*public FuelTank(float i_FuelCapacity, eFuelType i_EnergyType) : base(i_FuelCapacity)
-        {
-            m_EnergyType = i_EnergyType;
-        }*/
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
@@ -29,11 +26,16 @@ namespace Ex03.GarageLogic
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> schema = base.GetSchema();
+            
+            if (Schema == null)
+            {
+                Schema = base.GetSchema();
 
-            schema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = false };
-            schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true };
-            return schema;
+                Schema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = false };
+                Schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true };
+            }
+
+            return Schema;
         }
 
         public eFuelType EnergyType
@@ -41,17 +43,7 @@ namespace Ex03.GarageLogic
             get { return m_FuelType; }
         }
 
-        public override Dictionary<string, string> GetInfo()
-        {
-            Dictionary<string, string> info = new Dictionary<string, string>();
-
-            info["Tank Capacity"] = base.MaxCapacity.ToString();
-            info["Current Fuel Amount Left"] = $"{base.CurrAmount.ToString()} liters";
-            info["Fuel Type"] = m_FuelType.ToString();
-
-            return info;
-        }
-
+        
         public override void Fill(float i_FuelAmount, eFuelType i_FuelType)
         {
             ///this funciton adds fuel to the tank as requested

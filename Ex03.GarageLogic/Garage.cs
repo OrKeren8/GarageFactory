@@ -7,9 +7,9 @@ namespace Ex03.GarageLogic
 
     public class Garage
     {
-        private Dictionary<string, MaintainedVehicle> Vehicles {  get; set; } = new Dictionary<string, MaintainedVehicle>();
+        private Dictionary<string, MaintainedVehicle> Vehicles { get; set; } = new Dictionary<string, MaintainedVehicle>();
 
-        public bool IsVehicleExist(string i_LicenseNumber, bool i_ThrowException=false)
+        public bool IsVehicleExist(string i_LicenseNumber, bool i_ThrowException = false)
         {
             bool isExist = false;
 
@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             return isExist;
         }
 
-        public void AddVehicle(Vehicle i_Vehicle) 
+        public void AddVehicle(Vehicle i_Vehicle)
         {
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
             if (IsVehicleExist(i_Vehicle.LicenseNumber))
@@ -48,12 +48,12 @@ namespace Ex03.GarageLogic
 
             foreach (MaintainedVehicle currentVehicle in this.Vehicles.Values)
             {
-                if(currentVehicle.Status == i_Filter)
+                if (currentVehicle.Status == i_Filter)
                 {
                     licenseNumbersFiltered.Add(currentVehicle.Vehicle.LicenseNumber);
                 }
             }
-            
+
             return licenseNumbersFiltered;
         }
 
@@ -72,9 +72,9 @@ namespace Ex03.GarageLogic
         public void FillWheelsToTheMax(string i_LicenseNumber)
         {
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
-            
+
             MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
-            foreach(Wheel wheel in currVehicle.Vehicle.Wheels)
+            foreach (Wheel wheel in currVehicle.Vehicle.Wheels)
             {
                 wheel.FillAir(wheel.MaxAirPressure - wheel.CurrAirPressure);
             }
@@ -96,9 +96,10 @@ namespace Ex03.GarageLogic
             currVehicle.Vehicle.EnergyTank.Fill(i_AmountOfMinutes);
         }
 
-        public void GetVehicleData(string i_LicenseNumber)
+        public Dictionary<string, FieldDescriptor> GetVehicleData(string i_LicenseNumber)
         {
-            //return Vehicles[i_LicenseNumber].GetInfo();
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            return Vehicles[i_LicenseNumber].Vehicle.GetSchema();
         }
 
         public virtual Dictionary<string, FieldDescriptor> GetVehicleSchema(string i_LicenseNumber)
@@ -111,5 +112,18 @@ namespace Ex03.GarageLogic
         {
             this.Vehicles[i_LicenseNumber].Vehicle.Init(i_VehicleDataSchema);
         }
-    }
+
+        /*public bool AreVehicleParametersValidCar(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            bool isValid = true;
+            if(i_Schema.
+            //foreach (var kvp in i_Schema)
+            //{
+            //    if(kvp.)
+            //}
+
+
+        }*/
+
+     }
 }

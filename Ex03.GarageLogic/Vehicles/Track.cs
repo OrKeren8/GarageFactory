@@ -7,6 +7,8 @@ namespace Ex03.GarageLogic
     {
         private bool m_IceLoad;
         private float m_MaxLoadVolume;
+        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
+
 
         public Track(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) : base(i_LicenseNumber, i_Wheels, i_EnergyTank) { }
 
@@ -18,12 +20,15 @@ namespace Ex03.GarageLogic
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> trackSchema = base.GetSchema();
+            if(Schema == null)
+            {
+                Dictionary<string, FieldDescriptor> Schema = base.GetSchema();
 
-            trackSchema["Ice Load"] = new FieldDescriptor { StringDescription = "Ice Load", Type = typeof(bool), IsRequired = true };
-            trackSchema["Max Load Volume"] = new FieldDescriptor { StringDescription = "Max Load Volume", Type = typeof(float), IsRequired = false };
+                Schema["Ice Load"] = new FieldDescriptor { StringDescription = "Ice Load", Type = typeof(bool), IsRequired = true };
+                Schema["Max Load Volume"] = new FieldDescriptor { StringDescription = "Max Load Volume", Type = typeof(float), IsRequired = true };
+            }
 
-            return trackSchema;
+            return Schema;
         }
 
     }

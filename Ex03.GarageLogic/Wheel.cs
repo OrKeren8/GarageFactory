@@ -8,33 +8,28 @@ namespace Ex03.GarageLogic
         public string Manufacturer { get; private set; }
         public float CurrAirPressure {  get; private set; }
         public float MaxAirPressure {  get; private set; }
+        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            this.Manufacturer = i_Schema["Manufacturer"].Value.ToString();
-            this.CurrAirPressure = (float)i_Schema["Curr Air Pressure"].Value;
-            this.MaxAirPressure = (float)i_Schema["Max Air Pressure"].Value;
+            Schema = i_Schema;
+            this.Manufacturer = Schema["Manufacturer"].Value.ToString();
+            this.CurrAirPressure = (float)Schema["Curr Air Pressure"].Value;
+            this.MaxAirPressure = (float)Schema["Max Air Pressure"].Value;
         }
 
         public virtual Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> wheelSchema = new Dictionary<string, FieldDescriptor>();
+            if(Schema == null) 
+            {
+                Schema = new Dictionary<string, FieldDescriptor>();
 
-            wheelSchema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
-            wheelSchema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = true };
-            wheelSchema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
+                Schema["Manufacturer"] = new FieldDescriptor { StringDescription = "Wheels Manufacturer", Type = typeof(string), IsRequired = true };
+                Schema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = true };
+                Schema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
+            }
 
-            return wheelSchema;
-        }
-
-        public Dictionary<string, string> GetInfo()
-        {
-            var info = new Dictionary<string, string>();
-            
-            info["Manufacturer"] = Manufacturer;
-            info["Air Pressure"] = CurrAirPressure.ToString();
-
-            return info;
+            return Schema;
         }
 
         /// <summary>

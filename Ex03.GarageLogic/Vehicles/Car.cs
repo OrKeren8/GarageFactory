@@ -14,6 +14,8 @@ namespace Ex03.GarageLogic
     {
         private eColor Color {  get; set; }
         private int NumOfDoors {  get; set; }
+        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
+
 
 
         public Car(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) : base(i_LicenseNumber, i_Wheels, i_EnergyTank) { }
@@ -26,23 +28,15 @@ namespace Ex03.GarageLogic
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> carSchema = base.GetSchema();
+            if(Schema == null)
+            {
+                Dictionary<string, FieldDescriptor> Schema = base.GetSchema();
 
-            carSchema["Color"] = new FieldDescriptor { StringDescription = "Color", Type = typeof(eColor), IsRequired = true};
-            carSchema["Amount Of Doors"] = new FieldDescriptor { StringDescription = "Amount Of Doors", Type = typeof(int), IsRequired = true };
+                Schema["Color"] = new FieldDescriptor { StringDescription = "Color", Type = typeof(eColor), IsRequired = true};
+                Schema["Amount Of Doors"] = new FieldDescriptor { StringDescription = "Amount Of Doors", Type = typeof(int), IsRequired = true };
+            }
 
-            return carSchema;
+            return Schema;
         }
-
-        public override Dictionary<string, string> GetInfo()
-        {
-            Dictionary<string, string> info = base.GetInfo();
-
-            info["Color"] = Color.ToString();
-            info["Amount of doors:"] = NumOfDoors.ToString();
-
-            return info;
-        }
-
     }
 }
