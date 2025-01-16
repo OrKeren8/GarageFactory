@@ -1,8 +1,6 @@
 ﻿using Ex03.GarageLogic;
 using System.Collections.Generic;
-using Utils;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace UI
 {
@@ -141,10 +139,14 @@ namespace UI
         private void showAllLicensedNumber()
         {
             eMaintenanceStatus wantedStatus;
+            List<string> filteredLicenseNumbers;
+
             Console.WriteLine("please enter a wanted vehicles status, or press enter if you dont want to filter");
             Console.WriteLine("Vehicle status are:");
             Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatus>());
             GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
+            filteredLicenseNumbers = VehicleGarage.GetAllLicenseNumbers(wantedStatus);
+            Utils.General.PrintingStringList(filteredLicenseNumbers);
         }
 
         private void printStatusType()

@@ -10,7 +10,6 @@ namespace Ex03.GarageLogic
         Track
     }
 
-
     public class FieldDescriptor
     {
         public string StringDescription { get; set; }

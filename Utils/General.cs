@@ -10,12 +10,21 @@ namespace Utils
         {
             return Enum.GetValues(typeof(T)).Cast<int>().Max();
         }
+
         public static void PrintingStringList(List<string> StringsList)
         {
-            foreach (string currentString in StringsList)
+            if(StringsList.Count == 0)
             {
-                Console.WriteLine($"{currentString}");
+                Console.WriteLine("No details to show");
             }
+            else
+            {
+                foreach (string currentString in StringsList)
+                {
+                    Console.WriteLine($"{currentString}");
+                }
+            }
+            
         }
 
         public static List<string> GetStringListOfENum<T>() where T : Enum
