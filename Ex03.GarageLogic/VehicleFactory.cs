@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
 
     public class VehicleFactory
     {
-        public Garage Garage { get;} = new Garage();
+        public Garage Garage { get; } = new Garage();
 
         public List<string> GetAllFueledType()
         {
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
             return vehiclesFeulOptions;
         }
-        
+
 
         /// <summary>
         /// creates new vehivle from specific type
@@ -50,18 +50,23 @@ namespace Ex03.GarageLogic
             {
                 case eVehiclesTypes.Car:
                     vehicle = new Car(I_LicenseNumber, createWheelsList(Conf.CarAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
+                    fillDefaultCarData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.ElectricCar:
                     vehicle = new Car(I_LicenseNumber, createWheelsList(Conf.CarAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
+                    fillDefaultElectricCarData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Motorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
+                    fillDefaultMotorcycleData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.ElectricMotorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
+                    fillDefaultMotorcycleData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Track:
                     vehicle = new Track(I_LicenseNumber, createWheelsList(Conf.TrackAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
+                    fillDefaultTrackData(vehicle.GetSchema());
                     break;
                 default:
                     throw new Utils.Exceptions.AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", Utils.Exceptions.ErrorCode.VehicleTypeNotExist);
@@ -92,7 +97,7 @@ namespace Ex03.GarageLogic
 
         private EnergyTank createEnergyTank(eEnergyTankType i_Type)
         {
-            
+
             if (i_Type == eEnergyTankType.FuelTank)
             {
                 return new FuelTank();
@@ -101,5 +106,38 @@ namespace Ex03.GarageLogic
             return new ElectricBattery();
         }
 
+        private void fillDefaultCarData(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            i_Schema["Energy Tank Max Amount"].Value = Conf.CarFuelTankSize;
+            i_Schema["Fuel Type"].Value = Conf.CarDefaultFuelType;
+            i_Schema["Max Air Pressure"].Value = Conf.CarMaxAirPressure;
+        }
+
+        private void fillDefaultElectricCarData(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            i_Schema["Energy Tank Max Amount"].Value = Conf.ElectricCarMaxChargeTime;
+            i_Schema["Max Air Pressure"].Value = Conf.CarMaxAirPressure;
+        }
+
+        private void fillDefaultMotorcycleData(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            i_Schema["Energy Tank Max Amount"].Value = Conf.MotorcycleMaxFuelAmount;
+            i_Schema["Fuel Type"].Value = Conf.MotorcycleDefaultFuelType;
+            i_Schema["Max Air Pressure"].Value = Conf.MotorcycleMaxtAirPressure;
+        }
+
+        private void fillDefaultElectricMotorcycleData(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            i_Schema["Energy Tank Max Amount"].Value = Conf.ElectricMotorcycleMaxBatteryTime;
+            i_Schema["Max Air Pressure"].Value = Conf.MotorcycleMaxtAirPressure;
+        }
+
+        private void fillDefaultTrackData(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            i_Schema["Energy Tank Max Amount"].Value = Conf.TrackFuelTankSize;
+            i_Schema["Fuel Type"].Value = Conf.TrackDefaultFuelType;
+            i_Schema["Max Air Pressure"].Value = Conf.trackMaxtAirPressure;
+        }
     }
 }
+

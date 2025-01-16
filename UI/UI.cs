@@ -31,10 +31,13 @@ namespace UI
                         changeVehicleStatus();
                         break;
                     case Menu.eMenuSelect.InflateVehicleTiresToMaximum:
-                        //FillWheelsToTheMax();
+                        FillWheelsToTheMax();
                         break;
                     case Menu.eMenuSelect.ShowAllVehicleLicenseNumber:
                         showAllLicensedNumber();
+                        break;
+                    case Menu.eMenuSelect.ChargeElectricVehicle:
+                        this.chargeVehicleBattery();
                         break;
                 }
             }
@@ -114,16 +117,9 @@ namespace UI
             Dictionary<string, FieldDescriptor> vehicleSchema;
 
 
-            try
-            {
-                vehicleSchema = VehicleFactory.CreateVehicle(vehicleType, i_LicenseNumber);
-                fillSchemaData(vehicleSchema);
-                VehicleFactory.InitVehicle(i_LicenseNumber, vehicleSchema);
-            }
-            catch (Exception e)
-            {
-                //Console.WriteLine(e.ToString());
-            }
+            vehicleSchema = VehicleFactory.CreateVehicle(vehicleType, i_LicenseNumber);
+            fillSchemaData(vehicleSchema);
+            VehicleFactory.InitVehicle(i_LicenseNumber, vehicleSchema);
 
         }
 
@@ -131,31 +127,34 @@ namespace UI
         {
             foreach (var key in o_Schema.Keys)
             {
-                Console.WriteLine($"Please enter the value for {o_Schema[key].StringDescription}: ");
-                if (o_Schema[key].Type.IsEnum)
+                if (o_Schema[key].IsRequired)
                 {
-                    Console.WriteLine("Available options:");
-                    int i = 0;
-                    foreach (var enumValue in Enum.GetNames(o_Schema[key].Type))
+                    Console.WriteLine($"Please enter the value for {o_Schema[key].StringDescription}: ");
+                    if (o_Schema[key].Type.IsEnum)
                     {
-                        Console.WriteLine($"{i}. {enumValue}");
-                        i++;
+                        Console.WriteLine("Available options:");
+                        int i = 0;
+                        foreach (var enumValue in Enum.GetNames(o_Schema[key].Type))
+                        {
+                            Console.WriteLine($"{i}. {enumValue}");
+                            i++;
+                        }
                     }
-                }
-                while (true)
-                {
-                    string input = Console.ReadLine();
-
-                    (bool, object) result = StringValidator.tryCastToType(input, o_Schema[key].Type);
-
-                    if (result.Item1)
+                    while (true)
                     {
-                        o_Schema[key].Value = result.Item2;
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please try again.");
+                        string input = Console.ReadLine();
+
+                        (bool, object) result = StringValidator.tryCastToType(input, o_Schema[key].Type);
+
+                        if (result.Item1)
+                        {
+                            o_Schema[key].Value = result.Item2;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please try again.");
+                        }
                     }
                 }
             }
@@ -198,18 +197,20 @@ namespace UI
             eMaintenanceStatus newStatus;
             
             Console.WriteLine("Please enter the status you want for your vehicle:");
+            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatus>());
             GetValidDataFromUser(out newStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
 
             VehicleFactory.Garage.ChangeStatus(licenceNumber, newStatus);
             Console.WriteLine($"Status successfully chanwantedChange to {newStatus}!");
         }
 
-        /*private void FillWheelsToTheMax(wantedChange        {
+        private void FillWheelsToTheMax() 
+        { 
             string licenceNumber = getLicenseNumberFromUser();
 
-            VehicleGarage.FillWheelsToTheMax(licenceNumber);
+            this.VehicleFactory.Garage.FillWheelsToTheMax(licenceNumber);
             Console.WriteLine("Your wheels successfully filled!");
-        }*/
+        }
 
         private string getLicenseNumberFromUser()
         {
@@ -273,13 +274,13 @@ namespace UI
             Console.WriteLine("Successfully fueled");
         }
 
-        private void chargeVehicleUI()
+        private void chargeVehicleBattery()
         {
             string userLicensNumber = getLicenseNumberFromUser();
             float amountOfMinutes;
-            //CheckIfVehicleTypeIsByBattery(userLicensNumber); //TODO: need to add function that check if its run by battery
+
             Console.WriteLine("Please enter how many minutes you want to charge:");
-            amountOfMinutes = float.Parse(Console.ReadLine());
+            this.GetValidDataFromUser(out amountOfMinutes, StringValidator.IsInt);
             VehicleFactory.Garage.ChargeElectricBattery(userLicensNumber, amountOfMinutes);
             Console.WriteLine("Successfully charged");
         }

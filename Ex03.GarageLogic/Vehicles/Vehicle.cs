@@ -34,10 +34,9 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
 
-            //schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true };
             schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
             var mergedSchema = schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            var mergedSchemanewer = schema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var mergedSchemanewer = mergedSchema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
 
             return mergedSchemanewer;

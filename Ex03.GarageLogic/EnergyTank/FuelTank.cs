@@ -29,11 +29,11 @@ namespace Ex03.GarageLogic
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            Dictionary<string, FieldDescriptor> fuelTankSchema = new Dictionary<string, FieldDescriptor>();
+            Dictionary<string, FieldDescriptor> schema = base.GetSchema();
 
-            fuelTankSchema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = true };
-            fuelTankSchema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true };
-            return fuelTankSchema;
+            schema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = false };
+            schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true };
+            return schema;
         }
 
         public eFuelType EnergyType
@@ -45,8 +45,8 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, string> info = new Dictionary<string, string>();
 
-            info["Tank Capacity"] = base.m_MaxCapacity.ToString();
-            info["Current Fuel Amount Left"] = $"{base.m_CurrAmount.ToString()} liters";
+            info["Tank Capacity"] = base.MaxCapacity.ToString();
+            info["Current Fuel Amount Left"] = $"{base.CurrAmount.ToString()} liters";
             info["Fuel Type"] = m_FuelType.ToString();
 
             return info;

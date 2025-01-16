@@ -14,7 +14,7 @@ namespace UI
 
             maxEnumVal = Utils.General.GetMaxEnumValue<T>();
 
-            (isValid, digit) = isDigitInRange(i_UserSelection, 0, maxEnumVal);
+            (isValid, digit) = IsDigitInRange(i_UserSelection, 0, maxEnumVal);
 
             if (isValid)
             {
@@ -24,7 +24,7 @@ namespace UI
             return (isValid, userSelect);
         }
 
-        public static (bool, int) isDigitInRange(string i_Digit, int i_Min, int i_Max)
+        public static (bool, int) IsDigitInRange(string i_Digit, int i_Min, int i_Max)
         {
             bool isDigit;
             int digit = 0;
@@ -47,25 +47,20 @@ namespace UI
             return (isDigit, digit);
         }
 
+        public static (bool, float) IsInt(string i_Num)
+        {
+            bool isInt;
+            float num = 0;
+
+            isInt = float.TryParse(i_Num, out num);
+            
+
+            return (isInt, num);
+        }
+
         static public (bool, string) IsValidLicenseNumber(string i_LicenseNumber)
         {
             bool isValid = true;
-
-            if (i_LicenseNumber.Length != 8)
-            {
-                isValid = false;
-            }
-            else
-            {
-                for (int i = 0; i < i_LicenseNumber.Length; i++)
-                {
-                    if (i_LicenseNumber[i] <= '0' || i_LicenseNumber[i] >= '9')
-                    {
-                        isValid = false;
-                        break;
-                    }
-                }
-            }
 
             return (isValid, i_LicenseNumber);
         }

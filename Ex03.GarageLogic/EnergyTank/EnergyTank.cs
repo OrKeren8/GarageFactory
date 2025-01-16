@@ -11,21 +11,19 @@ namespace Ex03.GarageLogic
 
     public abstract class EnergyTank
     {
-        internal float m_CurrAmount;
-        internal float m_MaxCapacity;
+        internal float CurrAmount {  get; set; }
+        internal float MaxCapacity { get; private set; }
         
 
-        /*public EnergyTank(float i_MaxCapacity)
+        public EnergyTank()
         {
-            m_MaxCapacity = i_MaxCapacity;
-            m_CurrAmount = 0;
-            
-        }*/
+            CurrAmount = 0;
+        }
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            m_CurrAmount = (float)i_Schema["Current Energy Amount"].Value;
-            m_MaxCapacity = (float)i_Schema["Max Amount"].Value;
+            CurrAmount = (float)i_Schema["Current Energy Amount"].Value;
+            MaxCapacity = (float)i_Schema["Max Amount"].Value;
         }
 
         public abstract Dictionary<string, string> GetInfo();
@@ -33,13 +31,13 @@ namespace Ex03.GarageLogic
         public virtual void Fill(float i_Amounttofill)
         {
             //this funciton adds combustion material to the tank untill it is full
-            if (m_CurrAmount + i_Amounttofill > m_MaxCapacity)
+            if (CurrAmount + i_Amounttofill > MaxCapacity)
             {
-                throw new Utils.Exceptions.ValueOutOfRangeException(m_MaxCapacity, 0);
+                throw new Utils.Exceptions.ValueOutOfRangeException(MaxCapacity, 0);
             }
             else
             {
-            m_CurrAmount += i_Amounttofill;
+            CurrAmount += i_Amounttofill;
             }
         }
 
@@ -53,7 +51,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, FieldDescriptor> energyTankSchema = new Dictionary<string, FieldDescriptor>();
 
             energyTankSchema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Energy Amount", Type = typeof(float), IsRequired = true };
-            energyTankSchema["Max Amount"] = new FieldDescriptor { StringDescription = "Max Amount", Type = typeof(float), IsRequired = true };
+            energyTankSchema["Energy Tank Max Amount"] = new FieldDescriptor { StringDescription = "Energy Tank Max Amount", Type = typeof(float), IsRequired = false };
 
             return energyTankSchema;
         }

@@ -21,8 +21,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, FieldDescriptor> trackSchema = base.GetSchema();
 
             trackSchema["Ice Load"] = new FieldDescriptor { StringDescription = "Ice Load", Type = typeof(bool), IsRequired = true };
-            trackSchema["Max Load Volume"] = new FieldDescriptor { StringDescription = "Max Load Volume", Type = typeof(float), IsRequired = true };
-            //trackSchema["Energy Tank"] = new FieldDescriptor { StringDescription = "Energy Tank", Type = typeof(EnergyTank), IsRequired = true };
+            trackSchema["Max Load Volume"] = new FieldDescriptor { StringDescription = "Max Load Volume", Type = typeof(float), IsRequired = false };
 
             return trackSchema;
         }

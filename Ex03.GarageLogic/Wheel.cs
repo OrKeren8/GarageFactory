@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, FieldDescriptor> wheelSchema = new Dictionary<string, FieldDescriptor>();
 
             wheelSchema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
-            wheelSchema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = false };
+            wheelSchema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = true };
             wheelSchema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
 
             return wheelSchema;
