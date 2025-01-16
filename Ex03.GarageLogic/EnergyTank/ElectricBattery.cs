@@ -6,6 +6,9 @@ namespace Ex03.GarageLogic
     {
         public readonly eEnergyTankType EnergyTankType = eEnergyTankType.ElectricBattery;
 
+
+        public ElectricBattery(float i_Capacity) : base(i_Capacity){}
+
         public override Dictionary<string, string> GetInfo()
         {
             Dictionary<string, string> info = new Dictionary<string, string>();

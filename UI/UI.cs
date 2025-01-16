@@ -33,7 +33,10 @@ namespace UI
                         changeVehicleStatus();
                         break;
                     case Menu.eMenuSelect.InflateVehicleTiresToMaximum:
-                        FillWheelsToTheMax();
+                        //FillWheelsToTheMax();
+                        break;
+                    case Menu.eMenuSelect.ShowAllVehicleLicenseNumber:
+                        showAllLicensedNumber();
                         break;
                 }
             }
@@ -138,53 +141,34 @@ namespace UI
         private void showAllLicensedNumber()
         {
             eMaintenanceStatus wantedStatus;
-            string wantedStatusString;
-            List<Vehicle> allVehicleList = VehicleGarage.GetAllVehiclesList(); 
             Console.WriteLine("please enter a wanted vehicles status, or press enter if you dont want to filter");
-            wantedStatusString = Console.ReadLine();
-            while (!StringValidator.IsValidStatus(wantedStatusString))
-            {
-                Console.WriteLine("Wrong status, please try again");
-                wantedStatusString = Console.ReadLine();
-            }
-            wantedStatus = (eMaintenanceStatus)Enum.Parse(typeof(eMaintenanceStatus), wantedStatusString);
-            printLicenseNumberFiltered(VehicleGarage.GetAllLicenseNumbers(wantedStatus, allVehicleList), wantedStatusString);
+            GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
         }
 
-        private void printLicenseNumberFiltered(List<string> licenseNumberByFilter, string i_wantedStatusString)
+        private void printStatusType()
         {
-            Console.WriteLine($"All the license number of the status: {i_wantedStatusString} are:");
-            foreach (string licenseNumber in licenseNumberByFilter)
-            {
-                Console.WriteLine(licenseNumber);
-            }
+
         }
+
 
         private void changeVehicleStatus()
         {
             string licenceNumber = getLicenseNumberFromUser();
-            eMaintenanceStatus wantedChangeStatus;
-            string wantedChangeStatusString;
+            eMaintenanceStatus newStatus;
             
             Console.WriteLine("Please enter the status you want for your vehicle:");
-            wantedChangeStatusString = Console.ReadLine();
-            while (!StringValidator.IsValidStatus(wantedChangeStatusString))
-            {
-                Console.WriteLine("Wrong input, please try again");
-                wantedChangeStatusString = Console.ReadLine();
-            }
-            wantedChangeStatus = (eMaintenanceStatus)Enum.Parse(typeof(eMaintenanceStatus), wantedChangeStatusString);
-            VehicleGarage.ChangeStatus(licenceNumber, wantedChangeStatus);
-            Console.WriteLine($"Status successfully changed to {wantedChangeStatus}!");
+            GetValidDataFromUser(out newStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
+
+            VehicleGarage.ChangeStatus(licenceNumber, newStatus);
+            Console.WriteLine($"Status successfully chanwantedChange to {newStatus}!");
         }
 
-        private void FillWheelsToTheMax()
-        {
+        /*private void FillWheelsToTheMax(wantedChange        {
             string licenceNumber = getLicenseNumberFromUser();
 
             VehicleGarage.FillWheelsToTheMax(licenceNumber);
             Console.WriteLine("Your wheels successfully filled!");
-        }
+        }*/
 
         private string getLicenseNumberFromUser()
         {
@@ -237,7 +221,7 @@ namespace UI
             string userLicensNumber = getLicenseNumberFromUser();
             eFuelType fuelTypeChoice;
             float fuelAmount;
-            CheckIfVehicleTypeIsByFuel(userLicensNumber); //TODO: need to add function that check if its run by fuel
+            //CheckIfVechicleTypeIsByFuel(userLicensNumber); //TODO: need to add function that check if its run by fuel
             Console.WriteLine("Please enter your fuel type:");
             Utils.General.PrintingStringList(ClassFactory.GetAllFueledType());
             GetValidDataFromUser(out fuelTypeChoice, StringValidator.CheckStringOfEnum<eFuelType>);
@@ -251,7 +235,7 @@ namespace UI
         {
             string userLicensNumber = getLicenseNumberFromUser();
             float amountOfMinutes;
-            CheckIfVehicleTypeIsByBattery(userLicensNumber); //TODO: need to add function that check if its run by battery
+            //CheckIfVehicleTypeIsByBattery(userLicensNumber); //TODO: need to add function that check if its run by battery
             Console.WriteLine("Please enter how many minutes you want to charge:");
             amountOfMinutes = float.Parse(Console.ReadLine());
             VehicleGarage.ChargeElectricBattery(userLicensNumber, amountOfMinutes);

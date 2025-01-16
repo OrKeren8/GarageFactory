@@ -17,5 +17,16 @@ namespace Utils
                 Console.WriteLine($"{currentString}");
             }
         }
+
+        public List<string> GetListOfStringOfENum<T>() where T : Enum
+        {
+            List<string> stringOfEnumList = new List<string>();
+            foreach (T enumToString in Enum.GetValues(typeof(T)))
+            {
+                stringOfEnumList.Add($"{enumToString.GetHashCode()}. {enumToString}");
+            }
+
+            return stringOfEnumList;
+        }
     }
 }
