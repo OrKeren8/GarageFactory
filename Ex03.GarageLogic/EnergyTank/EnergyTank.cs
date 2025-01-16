@@ -3,7 +3,12 @@ using Utils;
 
 namespace Ex03.GarageLogic
 {
-    
+    public enum eEnergyTankType
+    {
+        FuelTank,
+        ElectricBattery
+    }
+
     public abstract class EnergyTank
     {
         internal float m_CurrAmount;
@@ -46,7 +51,7 @@ namespace Ex03.GarageLogic
 
             return energyTankSchema;
         }
-        ///TODO: add get schema for it and for the chileds
 
+        public abstract eEnergyTankType GetType();
     }
 }

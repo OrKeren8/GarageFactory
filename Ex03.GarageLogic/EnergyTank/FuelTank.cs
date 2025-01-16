@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 namespace Ex03.GarageLogic
 {
 
@@ -14,6 +15,7 @@ namespace Ex03.GarageLogic
     public class FuelTank : EnergyTank
     {
         private eFuelType m_EnergyType;
+        private readonly eEnergyTankType EnergyTankType = eEnergyTankType.FuelTank;
         public FuelTank(float i_FuelCapacity, eFuelType i_EnergyType) : base(i_FuelCapacity)
         {
             m_EnergyType = i_EnergyType;
@@ -49,5 +51,11 @@ namespace Ex03.GarageLogic
             fuelTankSchema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = true };
             return fuelTankSchema;
         }
+
+        public override eEnergyTankType GetType()
+        {
+            return this.EnergyTankType;
+        }
+
     }
 }

@@ -4,10 +4,8 @@ namespace Ex03.GarageLogic
 {
     internal class ElectricBattery : EnergyTank
     {
-        
-        public ElectricBattery(float i_BaterryCapacity) : base(i_BaterryCapacity)
-        {
-        }
+        public readonly eEnergyTankType EnergyTankType = eEnergyTankType.ElectricBattery;
+
         public override Dictionary<string, string> GetInfo()
         {
             Dictionary<string, string> info = new Dictionary<string, string>();
@@ -17,7 +15,11 @@ namespace Ex03.GarageLogic
 
             return info;
         }
+        public override eEnergyTankType GetType()
+        {
+            return this.EnergyTankType;
+        }
 
-        
+
     }
 }

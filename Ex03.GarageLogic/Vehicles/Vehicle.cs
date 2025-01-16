@@ -3,22 +3,24 @@ using System.Linq;
 
 namespace Ex03.GarageLogic
 {
+
     public class Vehicle
     {
         public string LicenseNumber { get; private set; }
         private string ModelName { get; set; }
         public List<Wheel> Wheels { get; set; }
         public EnergyTank EnergyTank { get; set; }
+        
 
         public Vehicle(string i_LicenseNumber) 
         {
             LicenseNumber = i_LicenseNumber;
         }
 
-        public void InitVehicle( string i_LicenseNumber,
-                        string i_MmodelName,
-                        List<Wheel> i_Wheels,
-                        EnergyTank i_EnergyTank)//most likly we need to give a schema
+        public void InitVehicle(string i_LicenseNumber,
+                                string i_MmodelName,
+                                List<Wheel> i_Wheels,
+                                EnergyTank i_EnergyTank)//most likly we need to give a schema
         {
             LicenseNumber = i_LicenseNumber;
             ModelName = i_MmodelName;
@@ -51,5 +53,6 @@ namespace Ex03.GarageLogic
 
             return mergedSchemanewer;
         }
+
     }
 }

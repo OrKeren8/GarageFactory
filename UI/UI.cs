@@ -135,15 +135,6 @@ namespace UI
             return userTypeChoice;
         }
 
-        private void printingStringList(List<string> vehicleStringList)
-        {
-            foreach (string currentString in vehicleStringList)
-            {
-                Console.WriteLine($"{currentString}");
-            }
-        }
-
-
         private void showAllLicensedNumber()
         {
             eMaintenanceStatus wantedStatus;
