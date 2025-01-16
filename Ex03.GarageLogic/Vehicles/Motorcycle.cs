@@ -17,8 +17,6 @@ namespace Ex03.GarageLogic
     {
         private eLicenseType LicenseType {  get; set; }
         private float EngineVolume {  get; set; }
-        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
-
 
         public Motorcycle(  string i_LicenseNumber,
                             List<Wheel> i_Wheels, 
@@ -30,19 +28,17 @@ namespace Ex03.GarageLogic
         {
             this.LicenseType = (eLicenseType)i_Schema["License Type"].Value;
             this.EngineVolume = (float)i_Schema["Engine Volume"].Value;
+            base.Init(i_Schema);
         }
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
-            if(Schema == null)
-            {
-                Dictionary<string, FieldDescriptor> Schema = base.GetSchema();
+            Dictionary<string, FieldDescriptor> schema = base.GetSchema();
+            
+            schema["License Type"] = new FieldDescriptor { StringDescription = "License type", Type = typeof(eLicenseType), IsRequired = true, Value=this.LicenseNumber};
+            schema["Engine Volume"] = new FieldDescriptor { StringDescription = "Engine volume", Type = typeof(float), IsRequired = true, Value = this.EngineVolume };
 
-                Schema["License Type"] = new FieldDescriptor { StringDescription = "License type", Type = typeof(eLicenseType), IsRequired = true };
-                Schema["Engine Volume"] = new FieldDescriptor { StringDescription = "Engine volume", Type = typeof(float), IsRequired = true };
-            }
-
-            return Schema;
+            return schema;
         }
     }
 }

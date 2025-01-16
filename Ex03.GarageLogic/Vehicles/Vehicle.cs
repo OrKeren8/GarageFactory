@@ -11,9 +11,6 @@ namespace Ex03.GarageLogic
         public List<Wheel> Wheels { get; set; }
         public EnergyTank EnergyTank { get; set; } = null;
 
-        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
-        
-
         public Vehicle(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) 
         {
             LicenseNumber = i_LicenseNumber;
@@ -23,7 +20,6 @@ namespace Ex03.GarageLogic
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            LicenseNumber = i_Schema["License Number"].Value.ToString();
             ModelName = i_Schema["Model Name"].Value.ToString();
             foreach (Wheel wheel in Wheels)
             {
@@ -34,18 +30,14 @@ namespace Ex03.GarageLogic
 
         public virtual Dictionary<string, FieldDescriptor> GetSchema()
         {
+            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
             
-            if(Schema == null)
-            {
-                Schema = new Dictionary<string, FieldDescriptor>();
+            schema["Model Name"] = new FieldDescriptor { StringDescription = "Model Name", Type = typeof(string), IsRequired = true, Value=this.ModelName};
+            var mergedSchema = schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var mergedSchemanewer = mergedSchema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            schema = mergedSchemanewer;
 
-                Schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
-                var mergedSchema = Schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-                var mergedSchemanewer = mergedSchema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-                Schema = mergedSchema;
-            }
-
-            return Schema;
+            return schema;
         }
     }
 }

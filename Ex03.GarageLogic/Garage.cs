@@ -116,7 +116,18 @@ namespace Ex03.GarageLogic
         /*public bool AreVehicleParametersValidCar(Dictionary<string, FieldDescriptor> i_Schema)
         {
             bool isValid = true;
-            if(i_Schema.
+
+            if (i_Schema.ContainsKey("Amount Of Doors"))
+            {
+                var doorsField = i_Schema["Amount Of Doors"];
+
+        
+                    if (doorsField.Value is int numOfDoors && (numOfDoors < 2 || numOfDoors > 5))
+                     {
+                        return false; 
+                     }
+             }
+
             //foreach (var kvp in i_Schema)
             //{
             //    if(kvp.)
@@ -125,5 +136,5 @@ namespace Ex03.GarageLogic
 
         }*/
 
-     }
+    }
 }

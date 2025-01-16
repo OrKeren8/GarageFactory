@@ -16,14 +16,7 @@ namespace Ex03.GarageLogic
             Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
 
             schema = base.GetSchema();
-            if(schema == null)
-            {
-                schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Battery Hours That Left", Type = typeof(float), IsRequired = true };
-            }
-            else
-            {
-                schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Battery Hours That Left", Value=};
-            }
+            schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Battery Hours That Left", Type = typeof(float), IsRequired = true, Value = this.CurrAmount };
 
             return schema;
         }

@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
     {
         public string StringDescription { get; set; }
         public Type Type { get; set; }
-        public object Value { get; set; } = null;
+        public object Value { get; set; }
         public bool IsRequired { get; set; }
     }
 
@@ -45,28 +45,29 @@ namespace Ex03.GarageLogic
         public Dictionary<string, FieldDescriptor> CreateVehicle(eVehiclesTypes i_VehicleType, string I_LicenseNumber)
         {
             Vehicle vehicle;
+            Dictionary<string, FieldDescriptor> schema;
 
             switch (i_VehicleType)
             {
                 case eVehiclesTypes.Car:
                     vehicle = new Car(I_LicenseNumber, createWheelsList(Conf.CarAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
-                    fillDefaultCarData(vehicle.GetSchema());
+                    schema = fillDefaultCarData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.ElectricCar:
                     vehicle = new Car(I_LicenseNumber, createWheelsList(Conf.CarAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
-                    fillDefaultElectricCarData(vehicle.GetSchema());
+                    schema = fillDefaultElectricCarData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Motorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
-                    fillDefaultMotorcycleData(vehicle.GetSchema());
+                    schema = fillDefaultMotorcycleData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.ElectricMotorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
-                    fillDefaultElectricMotorcycleData(vehicle.GetSchema());
+                    schema = fillDefaultElectricMotorcycleData(vehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Track:
                     vehicle = new Track(I_LicenseNumber, createWheelsList(Conf.TrackAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
-                    fillDefaultTrackData(vehicle.GetSchema());
+                    schema = fillDefaultTrackData(vehicle.GetSchema());
                     break;
                 default:
                     throw new Utils.Exceptions.AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", Utils.Exceptions.ErrorCode.VehicleTypeNotExist);
@@ -75,7 +76,7 @@ namespace Ex03.GarageLogic
 
             Garage.AddVehicle(vehicle);
 
-            return vehicle.GetSchema();
+            return schema;
         }
 
         public void InitVehicle(string i_LicenseNumber, Dictionary<string, FieldDescriptor> i_VehicleDataSchema)
@@ -106,37 +107,47 @@ namespace Ex03.GarageLogic
             return new ElectricBattery();
         }
 
-        private void fillDefaultCarData(Dictionary<string, FieldDescriptor> i_Schema)
+        private Dictionary<string, FieldDescriptor> fillDefaultCarData(Dictionary<string, FieldDescriptor> i_Schema)
         {
             i_Schema["Energy Tank Max Amount"].Value = Conf.CarFuelTankSize;
             i_Schema["Fuel Type"].Value = Conf.CarDefaultFuelType;
             i_Schema["Max Air Pressure"].Value = Conf.CarMaxAirPressure;
+
+            return i_Schema;
         }
 
-        private void fillDefaultElectricCarData(Dictionary<string, FieldDescriptor> i_Schema)
+        private Dictionary<string, FieldDescriptor> fillDefaultElectricCarData(Dictionary<string, FieldDescriptor> i_Schema)
         {
             i_Schema["Energy Tank Max Amount"].Value = Conf.ElectricCarMaxChargeTime;
             i_Schema["Max Air Pressure"].Value = Conf.CarMaxAirPressure;
+
+            return i_Schema;
         }
 
-        private void fillDefaultMotorcycleData(Dictionary<string, FieldDescriptor> i_Schema)
+        private Dictionary<string, FieldDescriptor> fillDefaultMotorcycleData(Dictionary<string, FieldDescriptor> i_Schema)
         {
             i_Schema["Energy Tank Max Amount"].Value = Conf.MotorcycleMaxFuelAmount;
             i_Schema["Fuel Type"].Value = Conf.MotorcycleDefaultFuelType;
             i_Schema["Max Air Pressure"].Value = Conf.MotorcycleMaxtAirPressure;
+            
+            return i_Schema;
         }
 
-        private void fillDefaultElectricMotorcycleData(Dictionary<string, FieldDescriptor> i_Schema)
+        private Dictionary<string, FieldDescriptor> fillDefaultElectricMotorcycleData(Dictionary<string, FieldDescriptor> i_Schema)
         {
             i_Schema["Energy Tank Max Amount"].Value = Conf.ElectricMotorcycleMaxBatteryTime;
             i_Schema["Max Air Pressure"].Value = Conf.MotorcycleMaxtAirPressure;
+
+            return i_Schema;
         }
 
-        private void fillDefaultTrackData(Dictionary<string, FieldDescriptor> i_Schema)
+        private Dictionary<string, FieldDescriptor> fillDefaultTrackData(Dictionary<string, FieldDescriptor> i_Schema)
         {
             i_Schema["Energy Tank Max Amount"].Value = Conf.TrackFuelTankSize;
             i_Schema["Fuel Type"].Value = Conf.TrackDefaultFuelType;
             i_Schema["Max Air Pressure"].Value = Conf.trackMaxtAirPressure;
+
+            return i_Schema;
         }
     }
 }

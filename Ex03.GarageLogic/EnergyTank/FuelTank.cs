@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Permissions;
 namespace Ex03.GarageLogic
 {
 
@@ -16,26 +17,21 @@ namespace Ex03.GarageLogic
     {
         private eFuelType m_FuelType;
         private readonly eEnergyTankType EnergyTankType = eEnergyTankType.FuelTank;
-        private Dictionary<string, FieldDescriptor> Schema { get; set; } = null;
 
-
-        public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
+        public override void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
             m_FuelType = (eFuelType)i_Schema["Fuel Type"].Value;
+            base.Init(i_Schema);
         }
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {
+            Dictionary<string, FieldDescriptor> schema = base.GetSchema();
             
-            if (Schema == null)
-            {
-                Schema = base.GetSchema();
+            schema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = false, Value = this.m_FuelType };
+            schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true, Value = this.CurrAmount };
 
-                Schema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = false };
-                Schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true };
-            }
-
-            return Schema;
+            return schema;
         }
 
         public eFuelType EnergyType
