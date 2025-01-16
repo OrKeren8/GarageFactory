@@ -26,17 +26,6 @@ namespace Ex03.GarageLogic
             return new Garage();
         }
 
-        public List<string> GetAllVehicleTypeNamesAndValues()
-        {
-            List<string> vehiclesTypesNamesAndValues = new List<string>();
-            foreach (eVehiclesTypes vehicleType in Enum.GetValues(typeof(eVehiclesTypes)))
-            {
-                vehiclesTypesNamesAndValues.Add($"{vehicleType.GetHashCode()}. {vehicleType}");
-            }
-
-            return vehiclesTypesNamesAndValues;
-        }
-
         public List<string> GetAllFueledType()
         {
             List<string> vehiclesFeulOptions = new List<string>();

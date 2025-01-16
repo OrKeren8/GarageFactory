@@ -18,7 +18,7 @@ namespace Utils
             }
         }
 
-        public List<string> GetListOfStringOfENum<T>() where T : Enum
+        public static List<string> GetStringListOfENum<T>() where T : Enum
         {
             List<string> stringOfEnumList = new List<string>();
             foreach (T enumToString in Enum.GetValues(typeof(T)))

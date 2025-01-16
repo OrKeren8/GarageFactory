@@ -46,13 +46,13 @@ namespace UI
         {
             //TODO: should print the strings from the menu.
             Console.WriteLine("Hello! Please choose one of the following option:");
-            //Console.WriteLine($"{Menu.eMenuSelect.EnterNewVehicleToGarage.GetHashCode()}. Enter new vehicle to the garage");
+            Console.WriteLine($"{Menu.eMenuSelect.EnterNewVehicleToGarage.GetHashCode()}. Enter new vehicle to the garage");
             Console.WriteLine($"{Menu.eMenuSelect.ShowAllVehicleLicenseNumber.GetHashCode()}. Show all vehicle's license number, with filtering option"); //need to add function that returned all of the vehicle in the garage
             Console.WriteLine($"{Menu.eMenuSelect.ChangeVehicleStatus.GetHashCode()}. Change vehicle status"); // need to check
             Console.WriteLine($"{Menu.eMenuSelect.InflateVehicleTiresToMaximum.GetHashCode()}. Inflate the vehicle's tires to maximum pressure"); //need to check
             Console.WriteLine($"{Menu.eMenuSelect.RefuelFuelVehicle.GetHashCode()}. Refuel a vehicle powered by fuel"); //TODO: I created fuelVehicleUI but need to complete
             Console.WriteLine($"{Menu.eMenuSelect.ChargeElectricVehicle.GetHashCode()}. Charge electric vehicle"); //TODO: I created chargeVehicleUI but need to complete
-            //Console.WriteLine($"{Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber.GetHashCode()}. Retrieve complete details of a vehicle by its license number");
+            Console.WriteLine($"{Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber.GetHashCode()}. Retrieve complete details of a vehicle by its license number");
             Console.WriteLine($"{Menu.eMenuSelect.Exit.GetHashCode()}. Exit");
             Console.WriteLine();
         }
@@ -131,7 +131,7 @@ namespace UI
             eVehiclesTypes userTypeChoice;
 
             Console.WriteLine("Please enter your vehicle type:");
-            Utils.General.PrintingStringList(ClassFactory.GetAllVehicleTypeNamesAndValues());
+            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eVehiclesTypes>());
             GetValidDataFromUser(out userTypeChoice, StringValidator.CheckStringOfEnum<eVehiclesTypes>);
 
             
@@ -142,6 +142,8 @@ namespace UI
         {
             eMaintenanceStatus wantedStatus;
             Console.WriteLine("please enter a wanted vehicles status, or press enter if you dont want to filter");
+            Console.WriteLine("Vehicle status are:");
+            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatus>());
             GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
         }
 
