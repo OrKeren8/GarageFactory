@@ -6,13 +6,13 @@ namespace Ex03.GarageLogic
     public class Wheel
     {
         public string Manufacturer { get; private set; }
-        public float CurrAirPressure {  get; private set; }
+        public float CurrAirPressure { get; private set; } = 0;
         public float MaxAirPressure {  get; private set; }
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
             this.Manufacturer = i_Schema["Manufacturer"].Value.ToString();
-            this.CurrAirPressure = (float)i_Schema["Curr Air Pressure"].Value;
+            FillAir((float)i_Schema["Curr Air Pressure"].Value);
             this.MaxAirPressure = (float)i_Schema["Max Air Pressure"].Value;
         }
 
