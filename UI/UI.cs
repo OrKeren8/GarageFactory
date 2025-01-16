@@ -122,7 +122,7 @@ namespace UI
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
             }
 
         }
@@ -132,6 +132,16 @@ namespace UI
             foreach (var key in o_Schema.Keys)
             {
                 Console.WriteLine($"Please enter the value for {o_Schema[key].StringDescription}: ");
+                if (o_Schema[key].Type.IsEnum)
+                {
+                    Console.WriteLine("Available options:");
+                    int i = 0;
+                    foreach (var enumValue in Enum.GetNames(o_Schema[key].Type))
+                    {
+                        Console.WriteLine($"{i}. {enumValue}");
+                        i++;
+                    }
+                }
                 while (true)
                 {
                     string input = Console.ReadLine();

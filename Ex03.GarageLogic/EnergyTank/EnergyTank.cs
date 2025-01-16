@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            m_CurrAmount = (float)i_Schema["Current Amount"].Value;
+            m_CurrAmount = (float)i_Schema["Current Energy Amount"].Value;
             m_MaxCapacity = (float)i_Schema["Max Amount"].Value;
         }
 
