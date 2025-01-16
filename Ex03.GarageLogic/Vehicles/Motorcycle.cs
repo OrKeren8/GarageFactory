@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -15,8 +16,8 @@ namespace Ex03.GarageLogic
 
     public class Motorcycle : Vehicle
     {
-        private eLicenseType LicenseType {  get; set; }
-        private float EngineVolume {  get; set; }
+        private eLicenseType m_LicenseType;
+        private float m_EngineVolume;
 
         public Motorcycle(  string i_LicenseNumber,
                             List<Wheel> i_Wheels, 
@@ -39,6 +40,30 @@ namespace Ex03.GarageLogic
             schema["Engine Volume"] = new FieldDescriptor { StringDescription = "Engine volume", Type = typeof(float), IsRequired = true, Value = this.EngineVolume };
 
             return schema;
+        }
+
+        private eLicenseType LicenseType
+        {
+            get { return this.m_LicenseType; }
+            set
+            {
+                if ((!Enum.IsDefined(typeof(eLicenseType), value)))
+                {
+                    throw new Utils.Exceptions.AppException("Not valid motorcycle license type", Utils.Exceptions.eErrorCode.MototrCyclePrepertyError);
+                }
+            }
+        }
+
+        private float EngineVolume
+        {
+            get { return this.m_EngineVolume; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Utils.Exceptions.AppException("Not valid engine volume", Utils.Exceptions.eErrorCode.MototrCyclePrepertyError);
+                }
+            }
         }
     }
 }

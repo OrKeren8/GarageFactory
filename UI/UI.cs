@@ -1,6 +1,7 @@
 ﻿using Ex03.GarageLogic;
 using System.Collections.Generic;
 using System;
+using static Utils.Exceptions;
 
 
 namespace UI
@@ -18,31 +19,37 @@ namespace UI
 
             while (!exit)
             {
-                userChoice = getUserMenuSelection();
-                System.Console.Clear();
-                switch(userChoice) {
-                    case Menu.eMenuSelect.Exit:
-                        exit = true;
-                        break;
-                    case Menu.eMenuSelect.EnterNewVehicleToGarage:
-                        addVehicleToGarage();
-                        break;
-                    case Menu.eMenuSelect.ChangeVehicleStatus:
-                        changeVehicleStatus();
-                        break;
-                    case Menu.eMenuSelect.InflateVehicleTiresToMaximum:
-                        FillWheelsToTheMax();
-                        break;
-                    case Menu.eMenuSelect.ShowAllVehicleLicenseNumber:
-                        showAllLicensedNumber();
-                        break;
-                    case Menu.eMenuSelect.ChargeElectricVehicle:
-                        this.chargeVehicleBattery();
-                        break;
-                    case Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber:
-                        this.printVehicleInfo();
-                        break;
-
+                try
+                {
+                    userChoice = getUserMenuSelection();
+                    System.Console.Clear();
+                    switch(userChoice) {
+                        case Menu.eMenuSelect.Exit:
+                            exit = true;
+                            break;
+                        case Menu.eMenuSelect.EnterNewVehicleToGarage:
+                            addVehicleToGarage();
+                            break;
+                        case Menu.eMenuSelect.ChangeVehicleStatus:
+                            changeVehicleStatus();
+                            break;
+                        case Menu.eMenuSelect.InflateVehicleTiresToMaximum:
+                            FillWheelsToTheMax();
+                            break;
+                        case Menu.eMenuSelect.ShowAllVehicleLicenseNumber:
+                            showAllLicensedNumber();
+                            break;
+                        case Menu.eMenuSelect.ChargeElectricVehicle:
+                            this.chargeVehicleBattery();
+                            break;
+                        case Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber:
+                            this.printVehicleInfo();
+                            break;
+                    }
+                }
+                catch (AppException e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
         }
@@ -127,11 +134,6 @@ namespace UI
             vehicleSchema = VehicleFactory.CreateVehicle(vehicleType, i_LicenseNumber);
             fillSchemaData(vehicleSchema);
             VehicleFactory.InitVehicle(i_LicenseNumber, vehicleSchema);
-           // checkIfValid = CheckVehicleParamValid();
-            
-
-
-
         }
 
         private void fillSchemaData(Dictionary<string, FieldDescriptor> o_Schema)

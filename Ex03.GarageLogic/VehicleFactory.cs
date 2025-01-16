@@ -70,7 +70,7 @@ namespace Ex03.GarageLogic
                     schema = fillDefaultTrackData(vehicle.GetSchema());
                     break;
                 default:
-                    throw new Utils.Exceptions.AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", Utils.Exceptions.ErrorCode.VehicleTypeNotExist);
+                    throw new Utils.Exceptions.AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", Utils.Exceptions.eErrorCode.VehicleTypeNotExist);
             }
 
 

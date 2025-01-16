@@ -27,6 +27,18 @@ namespace Ex03.GarageLogic
             return schema;
         }
 
+        private float MaxLoadVolume
+        {
+            get { return this.m_MaxLoadVolume; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Utils.Exceptions.AppException("Not valid load volume", Utils.Exceptions.eErrorCode.TrackPrepertyError);
+                }
+            }
+        }
+
     }
 
 }

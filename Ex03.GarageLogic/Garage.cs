@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             isExist = Vehicles.ContainsKey(i_LicenseNumber);
             if (i_ThrowException && !isExist)
             {
-                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.ErrorCode.VehiceNotExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_LicenseNumber}] does not exist in the garage", Utils.Exceptions.eErrorCode.VehiceNotExist);
             }
 
             return isExist;
@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
             if (IsVehicleExist(i_Vehicle.LicenseNumber))
             {
-                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_Vehicle.LicenseNumber}] already exist", Utils.Exceptions.ErrorCode.VehicleAlreadyExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_Vehicle.LicenseNumber}] already exist", Utils.Exceptions.eErrorCode.VehicleAlreadyExist);
             }
             else
             {
