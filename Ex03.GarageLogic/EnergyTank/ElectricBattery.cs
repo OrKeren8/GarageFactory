@@ -6,8 +6,7 @@ namespace Ex03.GarageLogic
     {
         public readonly eEnergyTankType EnergyTankType = eEnergyTankType.ElectricBattery;
 
-
-        public ElectricBattery(float i_Capacity) : base(i_Capacity){}
+        //public ElectricBattery(float i_Capacity) : base(i_Capacity){}
 
         public override Dictionary<string, string> GetInfo()
         {
@@ -23,6 +22,15 @@ namespace Ex03.GarageLogic
             return this.EnergyTankType;
         }
 
+        
 
+        public override Dictionary<string, FieldDescriptor> GetSchema()
+        {
+            Dictionary<string, FieldDescriptor> electricTankSchema = new Dictionary<string, FieldDescriptor>();
+
+            electricTankSchema["Battery Capacity"] = new FieldDescriptor { StringDescription = "Battery Maximum Capacity in precentage", Type = typeof(float), IsRequired = true }; //not sure if needed because its 100
+            electricTankSchema["Current Battery Precentage"] = new FieldDescriptor { StringDescription = "Current Battery Precentage that left", Type = typeof(float), IsRequired = true };
+            return electricTankSchema;
+        }
     }
 }

@@ -9,8 +9,13 @@ namespace Ex03.GarageLogic
         private float m_MaxLoadVolume;
         private EnergyTank m_EnergyTank;
 
-        public Track(string i_LicenseNumber) : base(i_LicenseNumber) { }
+        public Track(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) : base(i_LicenseNumber, i_Wheels, i_EnergyTank) { }
 
+        public override void Init(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            this.m_IceLoad = (bool)i_Schema["Ice Load"].Value;
+            this.m_MaxLoadVolume = (float)i_Schema["Max Load Volume"].Value;
+        }
 
         public override Dictionary<string, FieldDescriptor> GetSchema()
         {

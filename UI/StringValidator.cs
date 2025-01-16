@@ -69,5 +69,34 @@ namespace UI
 
             return (isValid, i_LicenseNumber);
         }
+
+        static public (bool, object) tryCastToType(string i_DataToCast, Type i_TargetType)
+        {
+
+            object targetData = null;
+            bool isValid = true;
+
+            try
+            {
+                if (i_TargetType == typeof(string))
+                {
+                    targetData = i_DataToCast;
+                }
+                else if (i_TargetType.IsEnum)
+                {
+                    targetData = Enum.Parse(i_TargetType, i_DataToCast, ignoreCase: true);
+                }
+                else
+                {
+                    targetData = Convert.ChangeType(i_DataToCast, i_TargetType);
+                }
+            }
+            catch
+            {
+                isValid = false;
+            }
+
+            return (isValid, targetData);
+        }
     }
 }

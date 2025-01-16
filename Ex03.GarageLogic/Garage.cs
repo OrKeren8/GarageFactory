@@ -106,5 +106,10 @@ namespace Ex03.GarageLogic
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
             return Vehicles[i_LicenseNumber].Vehicle.GetSchema();
         }
+
+        public void InitVehicle(string i_LicenseNumber, Dictionary<string, FieldDescriptor> i_VehicleDataSchema)
+        {
+            this.Vehicles[i_LicenseNumber].Vehicle.Init(i_VehicleDataSchema);
+        }
     }
 }

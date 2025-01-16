@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System;
 
+
 namespace UI
 {
     public class UI
     {
-        private VehicleFactory ClassFactory = new VehicleFactory();
-        private Garage VehicleGarage = new Garage();
+        private VehicleFactory VehicleFactory = new VehicleFactory();
 
         
         public void ApplicationMainLoop()
@@ -94,7 +94,7 @@ namespace UI
 
             Console.WriteLine("Please enter license number of the vehicle you want to add to the garage");
             vehicleLicenseNumber = Console.ReadLine();
-            if (!VehicleGarage.IsVehicleExist(vehicleLicenseNumber))
+            if (!VehicleFactory.Garage.IsVehicleExist(vehicleLicenseNumber))
             {
                 
                 createNewVehicle(vehicleLicenseNumber);
@@ -103,7 +103,7 @@ namespace UI
             else
             {
                 Console.WriteLine("The Vehicle already exist");
-                VehicleGarage.ChangeStatus(vehicleLicenseNumber, eMaintenanceStatus.InProgress);
+                VehicleFactory.Garage.ChangeStatus(vehicleLicenseNumber, eMaintenanceStatus.InProgress);
                 Console.WriteLine("The Status of the vehicle changed to - In Progress");
             }
         }
@@ -111,17 +111,44 @@ namespace UI
         private void createNewVehicle(string i_LicenseNumber)
         {
             eVehiclesTypes vehicleType = getVehiclaTypeFromUser();
+            Dictionary<string, FieldDescriptor> vehicleSchema;
+
 
             try
             {
-                VehicleGarage.AddVehicle(ClassFactory.CreateVehicle(vehicleType, i_LicenseNumber));
-                VehicleGarage.GetVehicleData(i_LicenseNumber);
+                vehicleSchema = VehicleFactory.CreateVehicle(vehicleType, i_LicenseNumber);
+                fillSchemaData(vehicleSchema);
+                VehicleFactory.InitVehicle(i_LicenseNumber, vehicleSchema);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
 
+        }
+
+        private void fillSchemaData(Dictionary<string, FieldDescriptor> o_Schema)
+        {
+            foreach (var key in o_Schema.Keys)
+            {
+                Console.WriteLine($"Please enter the value for {o_Schema[key].StringDescription}: ");
+                while (true)
+                {
+                    string input = Console.ReadLine();
+
+                    (bool, object) result = StringValidator.tryCastToType(input, o_Schema[key].Type);
+
+                    if (result.Item1)
+                    {
+                        o_Schema[key].Value = result.Item2;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please try again.");
+                    }
+                }
+            }
         }
 
         private eVehiclesTypes getVehiclaTypeFromUser()
@@ -145,7 +172,7 @@ namespace UI
             Console.WriteLine("Vehicle status are:");
             Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatus>());
             GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
-            filteredLicenseNumbers = VehicleGarage.GetAllLicenseNumbers(wantedStatus);
+            filteredLicenseNumbers = VehicleFactory.Garage.GetAllLicenseNumbers(wantedStatus);
             Utils.General.PrintingStringList(filteredLicenseNumbers);
         }
 
@@ -163,7 +190,7 @@ namespace UI
             Console.WriteLine("Please enter the status you want for your vehicle:");
             GetValidDataFromUser(out newStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
 
-            VehicleGarage.ChangeStatus(licenceNumber, newStatus);
+            VehicleFactory.Garage.ChangeStatus(licenceNumber, newStatus);
             Console.WriteLine($"Status successfully chanwantedChange to {newStatus}!");
         }
 
@@ -227,11 +254,11 @@ namespace UI
             float fuelAmount;
             //CheckIfVechicleTypeIsByFuel(userLicensNumber); //TODO: need to add function that check if its run by fuel
             Console.WriteLine("Please enter your fuel type:");
-            Utils.General.PrintingStringList(ClassFactory.GetAllFueledType());
+            Utils.General.PrintingStringList(VehicleFactory.GetAllFueledType());
             GetValidDataFromUser(out fuelTypeChoice, StringValidator.CheckStringOfEnum<eFuelType>);
             Console.WriteLine("Please enter the amount of the fuel you want:");
             fuelAmount = float.Parse(Console.ReadLine());
-            VehicleGarage.FuelVehicle(userLicensNumber, fuelTypeChoice, fuelAmount);
+            VehicleFactory.Garage.FuelVehicle(userLicensNumber, fuelTypeChoice, fuelAmount);
             Console.WriteLine("Successfully fueled");
         }
 
@@ -242,7 +269,7 @@ namespace UI
             //CheckIfVehicleTypeIsByBattery(userLicensNumber); //TODO: need to add function that check if its run by battery
             Console.WriteLine("Please enter how many minutes you want to charge:");
             amountOfMinutes = float.Parse(Console.ReadLine());
-            VehicleGarage.ChargeElectricBattery(userLicensNumber, amountOfMinutes);
+            VehicleFactory.Garage.ChargeElectricBattery(userLicensNumber, amountOfMinutes);
             Console.WriteLine("Successfully charged");
         }
     }

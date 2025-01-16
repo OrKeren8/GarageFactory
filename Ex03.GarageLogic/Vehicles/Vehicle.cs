@@ -12,20 +12,35 @@ namespace Ex03.GarageLogic
         public EnergyTank EnergyTank { get; set; }
         
 
-        public Vehicle(string i_LicenseNumber) 
+        public Vehicle(string i_LicenseNumber, List<Wheel> i_Wheels, EnergyTank i_EnergyTank) 
         {
             LicenseNumber = i_LicenseNumber;
-        }
-
-        public void InitVehicle(string i_LicenseNumber,
-                                string i_MmodelName,
-                                List<Wheel> i_Wheels,
-                                EnergyTank i_EnergyTank)//most likly we need to give a schema
-        {
-            LicenseNumber = i_LicenseNumber;
-            ModelName = i_MmodelName;
             Wheels = i_Wheels;
             EnergyTank = i_EnergyTank;
+        }
+
+        public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            LicenseNumber = i_Schema["License Number"].Value.ToString();
+            ModelName = i_Schema["Model name"].Value.ToString();
+            foreach (Wheel wheel in Wheels)
+            {
+                wheel.Init(i_Schema);
+            }
+            EnergyTank.Init(i_Schema);
+        }
+
+        public virtual Dictionary<string, FieldDescriptor> GetSchema()
+        {
+            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+
+            //schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true };
+            schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
+            var mergedSchema = schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            var mergedSchemanewer = schema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+
+            return mergedSchemanewer;
         }
 
         public virtual Dictionary<string, string> GetInfo()
@@ -41,18 +56,10 @@ namespace Ex03.GarageLogic
             return info;
         }
 
-        public virtual Dictionary<string, FieldDescriptor> GetSchema()
-        {
-            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+        
 
-            schema["License number"] = new FieldDescriptor { StringDescription = "License number", Type = typeof(string), IsRequired = true };
-            schema["Model name"] = new FieldDescriptor { StringDescription = "Model name", Type = typeof(string), IsRequired = false };
-            var mergedSchema = schema.Concat(Wheels[0].GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            var mergedSchemanewer = schema.Concat(EnergyTank.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        
 
-
-            return mergedSchemanewer;
-        }
 
     }
 }

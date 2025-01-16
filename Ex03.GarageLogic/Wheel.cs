@@ -9,6 +9,24 @@ namespace Ex03.GarageLogic
         public float CurrAirPressure {  get; private set; }
         public float MaxAirPressure {  get; private set; }
 
+        public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            this.Manufacturer = i_Schema["Manufacturer"].Value.ToString();
+            this.CurrAirPressure = (float)i_Schema["Curr Air Pressure"].Value;
+            this.MaxAirPressure = (float)i_Schema["Max Air Pressure"].Value;
+        }
+
+        public virtual Dictionary<string, FieldDescriptor> GetSchema()
+        {
+            Dictionary<string, FieldDescriptor> wheelSchema = new Dictionary<string, FieldDescriptor>();
+
+            wheelSchema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
+            wheelSchema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = false };
+            wheelSchema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
+
+            return wheelSchema;
+        }
+
         public Dictionary<string, string> GetInfo()
         {
             var info = new Dictionary<string, string>();
@@ -34,18 +52,6 @@ namespace Ex03.GarageLogic
             {
                 CurrAirPressure += i_AditionalPressure;
             }
-
-        }
-
-        public virtual Dictionary<string, FieldDescriptor> GetSchema()
-        {
-            Dictionary<string, FieldDescriptor> wheelSchema = new Dictionary<string, FieldDescriptor>();
-
-            wheelSchema["Manufacturer"] = new FieldDescriptor { StringDescription = "Manufacturer", Type = typeof(string), IsRequired = true };
-            wheelSchema["Curr Air Pressure"] = new FieldDescriptor { StringDescription = "Curr Air Pressure", Type = typeof(float), IsRequired = false };
-            wheelSchema["Max Air Pressure"] = new FieldDescriptor { StringDescription = "Max Air Pressure", Type = typeof(float), IsRequired = false };
-
-            return wheelSchema;
         }
     }
 }

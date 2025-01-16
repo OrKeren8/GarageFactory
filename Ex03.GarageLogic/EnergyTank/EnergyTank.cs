@@ -15,11 +15,17 @@ namespace Ex03.GarageLogic
         internal float m_MaxCapacity;
         
 
-        public EnergyTank(float i_MaxCapacity)
+        /*public EnergyTank(float i_MaxCapacity)
         {
             m_MaxCapacity = i_MaxCapacity;
             m_CurrAmount = 0;
             
+        }*/
+
+        public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
+        {
+            m_CurrAmount = (float)i_Schema["Current Amount"].Value;
+            m_MaxCapacity = (float)i_Schema["Max Amount"].Value;
         }
 
         public abstract Dictionary<string, string> GetInfo();
@@ -46,7 +52,7 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, FieldDescriptor> energyTankSchema = new Dictionary<string, FieldDescriptor>();
 
-            energyTankSchema["Current Amount"] = new FieldDescriptor { StringDescription = "Current Amount", Type = typeof(float), IsRequired = true };
+            energyTankSchema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Energy Amount", Type = typeof(float), IsRequired = true };
             energyTankSchema["Max Amount"] = new FieldDescriptor { StringDescription = "Max Amount", Type = typeof(float), IsRequired = true };
 
             return energyTankSchema;
