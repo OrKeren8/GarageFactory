@@ -289,13 +289,21 @@ namespace UI
 
         private void chargeVehicleBattery()
         {
-            string userLicensNumber = getLicenseNumberFromUser();
+            string licensNumber = getLicenseNumberFromUser();
             float amountOfMinutes;
 
-            Console.WriteLine("Please enter how many minutes you want to charge:");
-            this.GetValidDataFromUser(out amountOfMinutes, StringValidator.IsInt);
-            VehicleFactory.Garage.ChargeElectricBattery(userLicensNumber, amountOfMinutes);
-            Console.WriteLine("Successfully charged");
+            if (this.VehicleFactory.Garage.IsElectricVehicle(licensNumber))
+            {
+                Console.WriteLine("Please enter how many minutes you want to charge:");
+                this.GetValidDataFromUser(out amountOfMinutes, StringValidator.IsInt);
+                VehicleFactory.Garage.ChargeElectricBattery(licensNumber, amountOfMinutes);
+                Console.WriteLine("Successfully charged");
+            }
+            else
+            {
+                Console.WriteLine("Selected vehicle is not an electric one ...");
+            }
+            
         }
     }
 

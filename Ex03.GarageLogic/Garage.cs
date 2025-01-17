@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Utils;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Ex03.GarageLogic
 {
@@ -102,9 +103,22 @@ namespace Ex03.GarageLogic
             currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelType);
         }
 
+        public bool IsElectricVehicle(string i_LicenseNumber)
+        {
+            bool isElectricVehicle = false;
+
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            if (this.Vehicles[i_LicenseNumber].Vehicle.EnergyTank.GetType() == eEnergyTankType.ElectricBattery)
+            {
+                isElectricVehicle = true;
+            }
+
+            return isElectricVehicle;
+        }
+
         public void ChargeElectricBattery(string i_LicenseNumber, float i_AmountOfMinutes)
         {
-            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            this.IsElectricVehicle(i_LicenseNumber);
 
             MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
             currVehicle.Vehicle.EnergyTank.Fill(i_AmountOfMinutes);
@@ -141,30 +155,9 @@ namespace Ex03.GarageLogic
             {
                 this.Vehicles.Remove(i_LicenseNumber);
             }
+            
         }
 
-        /*public bool AreVehicleParametersValidCar(Dictionary<string, FieldDescriptor> i_Schema)
-        {
-            bool isValid = true;
-
-            if (i_Schema.ContainsKey("Amount Of Doors"))
-            {
-                var doorsField = i_Schema["Amount Of Doors"];
-
         
-                    if (doorsField.Value is int numOfDoors && (numOfDoors < 2 || numOfDoors > 5))
-                     {
-                        return false; 
-                     }
-             }
-
-            //foreach (var kvp in i_Schema)
-            //{
-            //    if(kvp.)
-            //}
-
-
-        }*/
-
     }
 }
