@@ -42,13 +42,26 @@ namespace Ex03.GarageLogic
         /// </summary>
         /// <param name="i_Filter">filter by maintenace status</param>
         /// <returns></returns>
-        public List<string> GetAllLicenseNumbers(eMaintenanceStatus? i_Filter)
+        public List<string> GetAllLicenseNumbers(eMaintenanceStatusWithDefault? i_Filter)
         {
             List<string> licenseNumbersFiltered = new List<string>();
+            bool withFilter;
+            eMaintenanceStatus filter = default;
+            
+            if(i_Filter == eMaintenanceStatusWithDefault.All)
+            {
+                withFilter = false;
+            }
+            else
+            {
+                filter = (eMaintenanceStatus)i_Filter;
+                withFilter = true;
+            }
 
             foreach (MaintainedVehicle currentVehicle in this.Vehicles.Values)
             {
-                if (currentVehicle.Status == i_Filter)
+                
+                if (withFilter && (currentVehicle.Status == filter))
                 {
                     licenseNumbersFiltered.Add(currentVehicle.Vehicle.LicenseNumber);
                 }

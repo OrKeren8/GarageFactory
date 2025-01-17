@@ -6,6 +6,14 @@
         Fixed,
         Paid
     }
+    public enum eMaintenanceStatusWithDefault
+    {
+        InProgress = eMaintenanceStatus.InProgress,
+        Fixed = eMaintenanceStatus.Fixed,
+        Paid = eMaintenanceStatus.Paid,
+        All
+    }
+
     public class MaintainedVehicle
     {
         public string OwnerName { get; private set; }

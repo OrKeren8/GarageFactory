@@ -187,16 +187,16 @@ namespace UI
 
         private void showAllLicensedNumber()
         {
-            eMaintenanceStatus wantedStatus;
+            eMaintenanceStatusWithDefault wantedStatus;
             List<string> filteredLicenseNumbers;
 
-            Console.WriteLine("please enter a wanted vehicles status, or press enter if you dont want to filter");
+            Console.WriteLine("please enter a wanted vehicles status");
             Console.WriteLine("Vehicle status are:");
-            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatus>());
-            GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatus>);
+            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatusWithDefault>());
+            GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatusWithDefault>);
             filteredLicenseNumbers = VehicleFactory.Garage.GetAllLicenseNumbers(wantedStatus);
             Utils.General.PrintingStringList(filteredLicenseNumbers);
-        }
+        }   
 
         private void printStatusType()
         {
