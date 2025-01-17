@@ -193,8 +193,7 @@ namespace UI
             eMaintenanceStatusWithDefault wantedStatus;
             List<string> filteredLicenseNumbers;
 
-            Console.WriteLine("please enter a wanted vehicles status");
-            Console.WriteLine("Vehicle status are:");
+            Console.WriteLine("Please choose desired filter");
             Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatusWithDefault>());
             GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatusWithDefault>);
             filteredLicenseNumbers = VehicleFactory.Garage.GetAllLicenseNumbers(wantedStatus);

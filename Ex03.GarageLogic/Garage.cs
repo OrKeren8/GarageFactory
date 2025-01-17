@@ -63,7 +63,7 @@ namespace Ex03.GarageLogic
             foreach (MaintainedVehicle currentVehicle in this.Vehicles.Values)
             {
                 
-                if (withFilter && (currentVehicle.Status == filter))
+                if ((withFilter && (currentVehicle.Status == filter)) || !withFilter)
                 {
                     licenseNumbersFiltered.Add(currentVehicle.Vehicle.LicenseNumber);
                 }
