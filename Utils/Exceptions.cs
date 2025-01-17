@@ -22,6 +22,8 @@ namespace Utils
             VehicleTypeNotExist = 1001,
             VehiceNotExist = 1002,
             VehicleAlreadyExist = 1003,
+            VehicleFuelError = 1004,
+            VehicleChargeError = 1005,
 
             CarDoorsOutOfRange = 1100,
             CarColorError = 1101,

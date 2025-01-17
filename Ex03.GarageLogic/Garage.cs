@@ -95,9 +95,25 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public bool IsFueledVehicle(string i_LicenseNumber)
+        {
+            bool isFueledVehicle = false;
+
+            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            if (this.Vehicles[i_LicenseNumber].Vehicle.EnergyTank.GetType() == eEnergyTankType.FuelTank)
+            {
+                isFueledVehicle = true;
+            }
+
+            return isFueledVehicle;
+        }
+
         public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_Amount)
         {
-            IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
+            if(!this.IsFueledVehicle(i_LicenseNumber))
+            {
+                throw new Utils.Exceptions.AppException("cannot fuel an unfueled vehicle", Utils.Exceptions.eErrorCode.VehicleFuelError);
+            }
 
             MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
             currVehicle.Vehicle.EnergyTank.Fill(i_Amount, i_FuelType);
@@ -118,7 +134,10 @@ namespace Ex03.GarageLogic
 
         public void ChargeElectricBattery(string i_LicenseNumber, float i_AmountOfMinutes)
         {
-            this.IsElectricVehicle(i_LicenseNumber);
+            if (!this.IsElectricVehicle(i_LicenseNumber))
+            {
+                throw new Utils.Exceptions.AppException("cannot charge an unelectric vehicle", Utils.Exceptions.eErrorCode.VehicleChargeError);
+            }
 
             MaintainedVehicle currVehicle = Vehicles[i_LicenseNumber];
             currVehicle.Vehicle.EnergyTank.Fill(i_AmountOfMinutes);

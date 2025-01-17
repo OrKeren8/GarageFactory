@@ -45,6 +45,9 @@ namespace UI
                         case Menu.eMenuSelect.GetDetailsOfVehicleByLicenseNumber:
                             this.printVehicleInfo();
                             break;
+                        case Menu.eMenuSelect.RefuelFuelVehicle:
+                            this.fuelVehicle();
+                            break;
                     }
                 }
                 catch (AppException e)
@@ -271,20 +274,27 @@ namespace UI
             }
         }
 
-        private void fuelVehicleUI()
+        private void fuelVehicle()
         {
-            string userLicensNumber = getLicenseNumberFromUser();
-            eFuelType fuelTypeChoice;
+            string licensNumber = getLicenseNumberFromUser();
             float fuelAmount;
-            //CheckIfVechicleTypeIsByFuel(userLicensNumber); //TODO: need to add function that check if its run by fuel
-            Console.WriteLine("Please enter your fuel type:");
-            Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eFuelType>());
-            //Utils.General.PrintingStringList(VehicleFactory.GetAllFueledType());
-            GetValidDataFromUser(out fuelTypeChoice, StringValidator.CheckStringOfEnum<eFuelType>);
-            Console.WriteLine("Please enter the amount of the fuel you want:");
-            fuelAmount = float.Parse(Console.ReadLine());
-            VehicleFactory.Garage.FuelVehicle(userLicensNumber, fuelTypeChoice, fuelAmount);
-            Console.WriteLine("Successfully fueled");
+            eFuelType fuelTypeChoice;
+
+
+            if (this.VehicleFactory.Garage.IsFueledVehicle(licensNumber))
+            {
+                Console.WriteLine("Please enter your fuel type:");
+                Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eFuelType>());
+                GetValidDataFromUser(out fuelTypeChoice, StringValidator.CheckStringOfEnum<eFuelType>);
+                Console.WriteLine("Please enter the amount of the fuel you want in litters:");
+                this.GetValidDataFromUser(out fuelAmount, StringValidator.IsFloat);
+                VehicleFactory.Garage.FuelVehicle(licensNumber, fuelTypeChoice, fuelAmount);
+                Console.WriteLine("Successfully fueled");
+            }
+            else
+            {
+                Console.WriteLine("Selected vehicle is not a fueled one ...");
+            }
         }
 
         private void chargeVehicleBattery()
@@ -295,15 +305,14 @@ namespace UI
             if (this.VehicleFactory.Garage.IsElectricVehicle(licensNumber))
             {
                 Console.WriteLine("Please enter how many minutes you want to charge:");
-                this.GetValidDataFromUser(out amountOfMinutes, StringValidator.IsInt);
+                this.GetValidDataFromUser(out amountOfMinutes, StringValidator.IsFloat);
                 VehicleFactory.Garage.ChargeElectricBattery(licensNumber, amountOfMinutes);
                 Console.WriteLine("Successfully charged");
             }
             else
             {
                 Console.WriteLine("Selected vehicle is not an electric one ...");
-            }
-            
+            }            
         }
     }
 

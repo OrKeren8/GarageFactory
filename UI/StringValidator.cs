@@ -47,7 +47,7 @@ namespace UI
             return (isDigit, digit);
         }
 
-        public static (bool, float) IsInt(string i_Num)
+        public static (bool, float) IsFloat(string i_Num)
         {
             bool isInt;
             float num = 0;
