@@ -11,8 +11,10 @@ namespace Utils
             return Enum.GetValues(typeof(T)).Cast<int>().Max();
         }
 
-        public static void PrintingStringList(List<string> StringsList)
+        public static void PrintingStringList(List<string> StringsList, bool withIndex=false)
         {
+            int i = 1;
+            string indexStr = "";
             if(StringsList.Count == 0)
             {
                 Console.WriteLine("No details to show");
@@ -21,7 +23,9 @@ namespace Utils
             {
                 foreach (string currentString in StringsList)
                 {
-                    Console.WriteLine($"{currentString}");
+                    indexStr = withIndex ? $"{i}. " : "";
+                    Console.WriteLine($"{indexStr}{currentString}");
+                    i++;
                 }
             }
             

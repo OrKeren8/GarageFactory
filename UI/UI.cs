@@ -49,10 +49,12 @@ namespace UI
                             this.fuelVehicle();
                             break;
                     }
+                    Console.WriteLine();
                 }
                 catch (AppException e)
                 {
                     Console.WriteLine(e.Message);
+                    Console.WriteLine();
                 }
             }
         }
@@ -197,7 +199,7 @@ namespace UI
             Utils.General.PrintingStringList(Utils.General.GetStringListOfENum<eMaintenanceStatusWithDefault>());
             GetValidDataFromUser(out wantedStatus, StringValidator.CheckStringOfEnum<eMaintenanceStatusWithDefault>);
             filteredLicenseNumbers = VehicleFactory.Garage.GetAllLicenseNumbers(wantedStatus);
-            Utils.General.PrintingStringList(filteredLicenseNumbers);
+            Utils.General.PrintingStringList(filteredLicenseNumbers, withIndex: true);
         }   
 
         private void printStatusType()
