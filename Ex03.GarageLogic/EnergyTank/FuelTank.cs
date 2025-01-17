@@ -30,6 +30,7 @@ namespace Ex03.GarageLogic
             
             schema["Fuel Type"] = new FieldDescriptor { StringDescription = "Fuel Type", Type = typeof(eFuelType), IsRequired = false, Value = this.m_FuelType };
             schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Fuel Amount In Litters", Type = typeof(float), IsRequired = true, Value = this.CurrAmount };
+            schema["Energy Tank Max Amount"].StringDescription = "Fuel Tank Max Amount In Litters";
 
             return schema;
         }

@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
         public override void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
             this.LicenseType = (eLicenseType)i_Schema["License Type"].Value;
-            this.EngineVolume = (float)i_Schema["Engine Volume"].Value;
+            this.EngineVolume = (float)(i_Schema["Engine Volume"].Value);
             base.Init(i_Schema);
         }
 
@@ -36,8 +36,8 @@ namespace Ex03.GarageLogic
         {
             Dictionary<string, FieldDescriptor> schema = base.GetSchema();
             
-            schema["License Type"] = new FieldDescriptor { StringDescription = "License type", Type = typeof(eLicenseType), IsRequired = true, Value=this.LicenseNumber};
-            schema["Engine Volume"] = new FieldDescriptor { StringDescription = "Engine volume", Type = typeof(float), IsRequired = true, Value = this.EngineVolume };
+            schema["License Type"] = new FieldDescriptor { StringDescription = "License Type", Type = typeof(eLicenseType), IsRequired = true, Value=this.LicenseNumber};
+            schema["Engine Volume"] = new FieldDescriptor { StringDescription = "Engine Volume", Type = typeof(float), IsRequired = true, Value = this.EngineVolume };
 
             return schema;
         }
@@ -51,6 +51,10 @@ namespace Ex03.GarageLogic
                 {
                     throw new Utils.Exceptions.AppException("Not valid motorcycle license type", Utils.Exceptions.eErrorCode.MototrCyclePrepertyError);
                 }
+                else
+                {
+                    this.m_LicenseType = value;
+                }
             }
         }
 
@@ -62,6 +66,10 @@ namespace Ex03.GarageLogic
                 if (value <= 0)
                 {
                     throw new Utils.Exceptions.AppException("Not valid engine volume", Utils.Exceptions.eErrorCode.MototrCyclePrepertyError);
+                }
+                else
+                {
+                    this.m_EngineVolume = value;
                 }
             }
         }

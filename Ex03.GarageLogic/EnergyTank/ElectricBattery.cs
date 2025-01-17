@@ -17,6 +17,7 @@ namespace Ex03.GarageLogic
 
             schema = base.GetSchema();
             schema["Current Energy Amount"] = new FieldDescriptor { StringDescription = "Current Battery Hours That Left", Type = typeof(float), IsRequired = true, Value = this.CurrAmount };
+            schema["Energy Tank Max Amount"].StringDescription = "Battery Max Time In Houres";
 
             return schema;
         }

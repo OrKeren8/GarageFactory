@@ -36,6 +36,10 @@ namespace Ex03.GarageLogic
                 {
                     throw new Utils.Exceptions.AppException("Not valid load volume", Utils.Exceptions.eErrorCode.TrackPrepertyError);
                 }
+                else
+                {
+                    this.m_MaxLoadVolume=value;
+                }
             }
         }
 

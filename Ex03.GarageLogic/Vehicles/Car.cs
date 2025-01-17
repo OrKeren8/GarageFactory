@@ -44,6 +44,10 @@ namespace Ex03.GarageLogic
                 {
                     throw new Utils.Exceptions.AppException("Not valid amount of car doors", Utils.Exceptions.eErrorCode.CarDoorsOutOfRange);
                 }
+                else
+                {
+                    this.m_NumOfDoors = value;
+                }
             }
         }
 
@@ -55,6 +59,10 @@ namespace Ex03.GarageLogic
                 if (!Enum.IsDefined(typeof(eColor), value))
                 {
                     throw new Utils.Exceptions.AppException("Not valid car color", Utils.Exceptions.eErrorCode.CarColorError);
+                }
+                else
+                {
+                    this.m_Color = value;
                 }
             }
         }
