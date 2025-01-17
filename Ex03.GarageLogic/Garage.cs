@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Utils;
+using System;
 
 namespace Ex03.GarageLogic
 {
@@ -123,7 +124,23 @@ namespace Ex03.GarageLogic
 
         public void InitVehicle(string i_LicenseNumber, Dictionary<string, FieldDescriptor> i_VehicleDataSchema)
         {
-            this.Vehicles[i_LicenseNumber].Vehicle.Init(i_VehicleDataSchema);
+            try
+            {
+                this.Vehicles[i_LicenseNumber].Vehicle.Init(i_VehicleDataSchema);
+            }
+            catch (Exception e)
+            {
+                this.removeVehicle(i_LicenseNumber);
+                throw e;
+            }
+        }
+
+        private void removeVehicle(string i_LicenseNumber)
+        {
+            if (this.IsVehicleExist(i_LicenseNumber))
+            {
+                this.Vehicles.Remove(i_LicenseNumber);
+            }
         }
 
         /*public bool AreVehicleParametersValidCar(Dictionary<string, FieldDescriptor> i_Schema)

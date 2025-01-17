@@ -12,8 +12,8 @@ namespace Ex03.GarageLogic
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
             this.Manufacturer = i_Schema["Manufacturer"].Value.ToString();
-            FillAir((float)i_Schema["Curr Air Pressure"].Value);
             this.MaxAirPressure = (float)i_Schema["Max Air Pressure"].Value;
+            FillAir((float)i_Schema["Curr Air Pressure"].Value);
         }
 
         public virtual Dictionary<string, FieldDescriptor> GetSchema()
@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
         {
             if (CurrAirPressure + i_AditionalPressure > MaxAirPressure)
             {
-                throw new Utils.Exceptions.ValueOutOfRangeException(MaxAirPressure, 0);
+                throw new Utils.Exceptions.ValueOutOfRangeException(MaxAirPressure, 0, "Max air pressure exceed");
             }
             else
             {

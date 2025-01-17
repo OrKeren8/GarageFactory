@@ -21,8 +21,8 @@ namespace Ex03.GarageLogic
 
         public virtual void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            Fill((float)i_Schema["Current Energy Amount"].Value);
             MaxCapacity = (float)i_Schema["Energy Tank Max Amount"].Value;
+            Fill((float)i_Schema["Current Energy Amount"].Value);
         }
 
         public virtual void Fill(float i_Amounttofill)
@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
             //this funciton adds combustion material to the tank untill it is full
             if (CurrAmount + i_Amounttofill > MaxCapacity)
             {
-                throw new Utils.Exceptions.ValueOutOfRangeException(MaxCapacity, 0);
+                throw new Utils.Exceptions.ValueOutOfRangeException(MaxCapacity, 0, "max capacity exceed");
             }
             else
             {

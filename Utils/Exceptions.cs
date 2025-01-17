@@ -11,7 +11,7 @@ namespace Utils
             public float MaxValue { get; }
             public float MinValue { get; }
 
-            public ValueOutOfRangeException(float i_MaxValue, float i_MinValue): base("out of range error", eErrorCode.InvalidInput)
+            public ValueOutOfRangeException(float i_MaxValue, float i_MinValue, string msg): base($"out of range error: {msg}", eErrorCode.InvalidInput)
             {
                 MaxValue = i_MaxValue;
                 MinValue = i_MinValue;
