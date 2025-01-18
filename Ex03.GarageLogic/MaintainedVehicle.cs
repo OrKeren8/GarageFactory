@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 
 namespace Ex03.GarageLogic
@@ -34,6 +35,7 @@ namespace Ex03.GarageLogic
         {
             OwnerName = i_Schema["Owner Name"].Value.ToString();
             PhoneNumber = i_Schema["Phone Number"].Value.ToString();
+            this.Status = (eMaintenanceStatus)i_Schema["Status"].Value;
             this.Vehicle.Init(i_Schema);
         }
 
@@ -43,6 +45,7 @@ namespace Ex03.GarageLogic
 
             schema["Owner Name"] = new FieldDescriptor { StringDescription = "Owner Name", Type = typeof(string), IsRequired = true, Value = this.OwnerName };
             schema["Phone Number"] = new FieldDescriptor { StringDescription = "Phone Number", Type = typeof(string), IsRequired = true, Value = this.PhoneNumber };
+            schema["Status"] = new FieldDescriptor { StringDescription = "Status", Type = typeof(eMaintenanceStatus), IsRequired = false, Value = this.Status};
             var mergedSchema = schema.Concat(this.Vehicle.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             schema = mergedSchema;
 
