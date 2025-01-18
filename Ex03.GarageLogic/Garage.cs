@@ -145,7 +145,7 @@ namespace Ex03.GarageLogic
         public Dictionary<string, FieldDescriptor> GetVehicleData(string i_LicenseNumber)
         {
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
-            return Vehicles[i_LicenseNumber].Vehicle.GetSchema();
+            return Vehicles[i_LicenseNumber].GetSchema();
         }
 
         public virtual Dictionary<string, FieldDescriptor> GetVehicleSchema(string i_LicenseNumber)
@@ -158,7 +158,7 @@ namespace Ex03.GarageLogic
         {
             try
             {
-                this.Vehicles[i_LicenseNumber].Vehicle.Init(i_VehicleDataSchema);
+                this.Vehicles[i_LicenseNumber].Init(i_VehicleDataSchema);
             }
             catch (Exception e)
             {
