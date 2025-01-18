@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Ex03.GarageLogic
 {
     public enum eMaintenanceStatus
     {
@@ -18,7 +21,7 @@
     {
         public string OwnerName { get; private set; }
         public string PhoneNumber { get; private set; }
-        public eMaintenanceStatus Status { get; private set; }
+        public eMaintenanceStatus Status { get; private set; } = eMaintenanceStatus.InProgress;
         public Vehicle Vehicle {  get; private set; } 
 
         
@@ -27,12 +30,22 @@
             Vehicle = i_Vehicle;
         }
 
-        public void initMaintainedVehicle(  string i_OwnerName,
-                                            string i_PhoneNumber)
+        public void Init(Dictionary<string, FieldDescriptor> i_Schema)
         {
-            OwnerName = i_OwnerName;
-            PhoneNumber = i_PhoneNumber;
-            Status = eMaintenanceStatus.InProgress;
+            OwnerName = i_Schema["Owner Name"].Value.ToString();
+            PhoneNumber = i_Schema["Phone Number"].Value.ToString();
+        }
+
+        public virtual Dictionary<string, FieldDescriptor> GetSchema()
+        {
+            Dictionary<string, FieldDescriptor> schema = new Dictionary<string, FieldDescriptor>();
+
+            schema["Owner Name"] = new FieldDescriptor { StringDescription = "Owner Name", Type = typeof(string), IsRequired = true, Value = this.OwnerName };
+            schema["Phone Number"] = new FieldDescriptor { StringDescription = "Phone Number", Type = typeof(string), IsRequired = true, Value = this.PhoneNumber };
+            var mergedSchema = schema.Concat(this.Vehicle.GetSchema()).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            schema = mergedSchema;
+
+            return schema;
         }
 
         public void ChangeStatus(eMaintenanceStatus i_Status)
