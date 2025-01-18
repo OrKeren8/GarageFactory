@@ -1,4 +1,4 @@
-﻿using Ex03.GarageLogic;
+using Ex03.GarageLogic;
 using System.Collections.Generic;
 using System;
 using static Utils.Exceptions;
@@ -136,7 +136,7 @@ namespace UI
             Dictionary<string, FieldDescriptor> vehicleSchema;
 
 
-            vehicleSchema = VehicleFactory.CreateVehicle(vehicleType, i_LicenseNumber);
+            vehicleSchema = VehicleFactory.CreateMaintainedVehicle(vehicleType, i_LicenseNumber);
             fillSchemaData(vehicleSchema);
             VehicleFactory.InitVehicle(i_LicenseNumber, vehicleSchema);
         }

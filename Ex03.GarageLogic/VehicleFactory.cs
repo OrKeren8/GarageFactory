@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
@@ -42,39 +42,44 @@ namespace Ex03.GarageLogic
         /// <param name="i_VehicleType">The type of a vehicle</param>
         /// <returns>The new desired vehicle</returns>
         /// <exception cref="AppException">If the vehicle type does not exist</exception>
-        public Dictionary<string, FieldDescriptor> CreateVehicle(eVehiclesTypes i_VehicleType, string I_LicenseNumber)
+        public Dictionary<string, FieldDescriptor> CreateMaintainedVehicle(eVehiclesTypes i_VehicleType, string I_LicenseNumber)
         {
             Vehicle vehicle;
             Dictionary<string, FieldDescriptor> schema;
+            MaintainedVehicle maintainedVehicle;
 
             switch (i_VehicleType)
             {
                 case eVehiclesTypes.Car:
                     vehicle = new Car(I_LicenseNumber, createWheelsList(Conf.CarAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
-                    schema = fillDefaultCarData(vehicle.GetSchema());
+                    maintainedVehicle = new MaintainedVehicle(vehicle);
+                    schema = fillDefaultCarData(maintainedVehicle.GetSchema());
                     break;
                 case eVehiclesTypes.ElectricCar:
                     vehicle = new Car(I_LicenseNumber, createWheelsList(Conf.CarAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
-                    schema = fillDefaultElectricCarData(vehicle.GetSchema());
+                    maintainedVehicle = new MaintainedVehicle(vehicle);
+                    schema = fillDefaultElectricCarData(maintainedVehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Motorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
-                    schema = fillDefaultMotorcycleData(vehicle.GetSchema());
+                    maintainedVehicle = new MaintainedVehicle(vehicle);
+                    schema = fillDefaultMotorcycleData(maintainedVehicle.GetSchema());
                     break;
                 case eVehiclesTypes.ElectricMotorcycle:
                     vehicle = new Motorcycle(I_LicenseNumber, createWheelsList(Conf.MotorcycleAmountOfWheels), createEnergyTank(eEnergyTankType.ElectricBattery));
-                    schema = fillDefaultElectricMotorcycleData(vehicle.GetSchema());
+                    maintainedVehicle = new MaintainedVehicle(vehicle);
+                    schema = fillDefaultElectricMotorcycleData(maintainedVehicle.GetSchema());
                     break;
                 case eVehiclesTypes.Track:
                     vehicle = new Track(I_LicenseNumber, createWheelsList(Conf.TrackAmountOfWheels), createEnergyTank(eEnergyTankType.FuelTank));
-                    schema = fillDefaultTrackData(vehicle.GetSchema());
+                    maintainedVehicle = new MaintainedVehicle(vehicle);
+                    schema = fillDefaultTrackData(maintainedVehicle.GetSchema());
                     break;
                 default:
                     throw new Utils.Exceptions.AppException($"Vehicle type [{i_VehicleType.ToString()}] does not exist", Utils.Exceptions.eErrorCode.VehicleTypeNotExist);
             }
-
-
-            Garage.AddVehicle(vehicle);
+            
+            Garage.AddMaintainedVehicle(maintainedVehicle);
 
             return schema;
         }
