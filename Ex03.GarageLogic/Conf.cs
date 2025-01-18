@@ -1,4 +1,4 @@
-﻿namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic
 {
     public class Conf
     {
@@ -6,7 +6,9 @@
         public const eFuelType CarDefaultFuelType = eFuelType.Octan95;
         public const float CarMaxAirPressure = 34;//psi
         public const int CarAmountOfWheels = 5;
-        
+        public const int CarMinimumAmountDoors = 2;
+        public const int CarMaxAmountDoors = 5;
+
         public const float ElectricCarMaxChargeTime = 5.4f;//hours
         
         public const int TrackAmountOfWheels = 14;

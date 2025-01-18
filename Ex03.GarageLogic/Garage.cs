@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Utils;
 using System;
 using System.Runtime.CompilerServices;
@@ -24,17 +24,16 @@ namespace Ex03.GarageLogic
             return isExist;
         }
 
-        public void AddVehicle(Vehicle i_Vehicle)
+        public void AddMaintainedVehicle(MaintainedVehicle i_MaintainedVehicle)
         {
             ///add new veicle to the garage, if the vehicle is already exist throw an exception
-            if (IsVehicleExist(i_Vehicle.LicenseNumber))
+            if (IsVehicleExist(i_MaintainedVehicle.Vehicle.LicenseNumber))
             {
-                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_Vehicle.LicenseNumber}] already exist", Utils.Exceptions.eErrorCode.VehicleAlreadyExist);
+                throw new Utils.Exceptions.AppException($"Vehicle with license Number: [{i_MaintainedVehicle.Vehicle.LicenseNumber}] already exist", Utils.Exceptions.eErrorCode.VehicleAlreadyExist);
             }
             else
             {
-                MaintainedVehicle vehicleToAdd = new MaintainedVehicle(i_Vehicle);
-                Vehicles.Add(i_Vehicle.LicenseNumber, vehicleToAdd);
+                Vehicles.Add(i_MaintainedVehicle.Vehicle.LicenseNumber, i_MaintainedVehicle);
             }
         }
 
@@ -146,7 +145,7 @@ namespace Ex03.GarageLogic
         public Dictionary<string, FieldDescriptor> GetVehicleData(string i_LicenseNumber)
         {
             IsVehicleExist(i_LicenseNumber, i_ThrowException: true);
-            return Vehicles[i_LicenseNumber].Vehicle.GetSchema();
+            return Vehicles[i_LicenseNumber].GetSchema();
         }
 
         public virtual Dictionary<string, FieldDescriptor> GetVehicleSchema(string i_LicenseNumber)
@@ -159,7 +158,7 @@ namespace Ex03.GarageLogic
         {
             try
             {
-                this.Vehicles[i_LicenseNumber].Vehicle.Init(i_VehicleDataSchema);
+                this.Vehicles[i_LicenseNumber].Init(i_VehicleDataSchema);
             }
             catch (Exception e)
             {

@@ -34,6 +34,7 @@ namespace Ex03.GarageLogic
         {
             OwnerName = i_Schema["Owner Name"].Value.ToString();
             PhoneNumber = i_Schema["Phone Number"].Value.ToString();
+            this.Vehicle.Init(i_Schema);
         }
 
         public virtual Dictionary<string, FieldDescriptor> GetSchema()

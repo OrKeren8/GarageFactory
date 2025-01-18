@@ -21,5 +21,10 @@ namespace Ex03.GarageLogic
 
             return schema;
         }
+
+        public override void Fill(float i_Amounttofill)
+        {
+            base.Fill(i_Amounttofill/60f); //from minutes to hours
+        }
     }
 }
